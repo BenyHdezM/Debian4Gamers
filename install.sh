@@ -86,9 +86,12 @@ sudo reboot
 #TODO: Edit splash for Grub
 
 #TOD0: Davinci_Resolve for Debian
+# wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
 # sudo apt install fakeroot xorriso 
 
 #TODO: AMDGPU-PRO
+# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/focal/amdgpu-install_6.0.60001-1_all.deb
+# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
 
 #TODO: NVIDIA
 # Installing the appropriate GPU drivers
