@@ -68,8 +68,9 @@ git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
 git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
 git clone https://github.com/vinceliuice/WhiteSur-cursors.git
 cd WhiteSur-gtk-theme
-./install.sh -i debian
+./install.sh -i debian -l -c Light -N glassy
 ./tweaks.sh -F
+sudo flatpak override --filesystem=xdg-config/gtk-4.0
 cd ../WhiteSur-icon-theme
 ./install.sh
 cd ../WhiteSur-cursors
@@ -77,6 +78,12 @@ sudo ./install.sh
 
 sudo rm -R /tmp/whitesur 
 fi
+
+#ADD Keyboard Shurtcut for Terminal
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
 
 #GRUB FALLOUT SKIN
 wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash -s -- --lang English
