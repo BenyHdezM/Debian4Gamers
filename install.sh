@@ -16,7 +16,6 @@ else
   USER_NAME=$(whoami)
 fi
 
-
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
   echo -e "Hello $USER_NAME your User is already a Sudoers:\n"
   echo -e "Removing $USER_NAME from Sudoers and exit"
@@ -35,14 +34,13 @@ sudo dpkg --add-architecture i386
 sudo cp bookworm_sources.list /etc/apt/sources.list
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install firmware-amd-graphics nala git mesa-opencl-icd steam-installer
-
+sudo apt install -y firmware-amd-graphics nala mangohud git mesa-opencl-icd steam-installer
 
 sudo apt update
-sudo apt install mesa-vulkan-drivers
+sudo apt install -y mesa-vulkan-drivers
 
 #Install Extensios
-sudo apt install lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
+sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
 
 # #Enable Extensions
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
@@ -50,10 +48,15 @@ gnome-extensions enable ubuntu-appindicators@ubuntu.com
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
 #FLATPAK + FLATHUB
-sudo apt install flatpak
-sudo apt install gnome-software-plugin-flatpak
+sudo apt install -y flatpak
+sudo apt install -y gnome-software-plugin-flatpak
 ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+#Install Discord, Spotify and ProtonUp-Qt
+sudo flatpak install -y flathub com.discordapp.Discord
+sudo flatpak install -y flathub net.davidotek.pupgui2
+sudo flatpak install -y flathub com.spotify.Client
 
 #WhiteSur gtk Installation
 if [[ -w "/root" ]]; then
@@ -75,11 +78,20 @@ sudo ./install.sh
 sudo rm -R /tmp/whitesur 
 fi
 
+#GRUB FALLOUT SKIN
+wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash -s -- --lang English
 
 sudo reboot
 
+#TODO: Edit splash for Grub
 
+#TOD0: Davinci_Resolve for Debian
+# sudo apt install fakeroot xorriso 
 
+#TODO: AMDGPU-PRO
 
-
-#echo "$USER_NAME"
+#TODO: NVIDIA
+# Installing the appropriate GPU drivers
+# sudo apt-get install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
+# For h.264 and h.265 export you also need the NVIDIA encode library:
+# sudo apt-get install libnvidia-encode1
