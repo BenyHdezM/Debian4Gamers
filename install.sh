@@ -18,17 +18,17 @@ fi
 
 
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
-echo -e "Hello $USER_NAME your User is already a Sudoers:\n"
-sudo rm /etc/sudoers.d/$USER_NAME
-#su - root -c 'rm /etc/sudoers.d/'${USER_NAME}'' #This is for clean the sudoer file
+  echo -e "Hello $USER_NAME your User is already a Sudoers:\n"
+  echo -e "Removing $USER_NAME from Sudoers and exit"
+  sudo rm /etc/sudoers.d/$USER_NAME
+  exit
 else
-#Add User to sudoers
-echo -e "Hello $USER_NAME Please insert the ROOT password to add your User to Sudoers:\n" 
-su - root -c 'echo "'${USER_NAME}'  ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/'${USER_NAME}''
-echo -e "Adding $USER_NAME to Sudoers....\nThe User: $USER_NAME have now access to sudo\n"
+  #Add User to sudoers
+  echo -e "Hello $USER_NAME Please insert the ROOT password to add your User to Sudoers:\n" 
+  su - root -c 'echo "'${USER_NAME}'  ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/'${USER_NAME}''
+  echo -e "Adding $USER_NAME to Sudoers....\nThe User: $USER_NAME have now access to sudo\n"
 fi
 
-exit
 #Install all dependencies for Gaming
 echo -e "$USER_NAME Insert now your USER password (not the root one, now you are a sudoer)\n" 
 sudo dpkg --add-architecture i386

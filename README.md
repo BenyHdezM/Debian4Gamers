@@ -20,8 +20,3 @@ A Simple Script to custom Debian 12 for best experience for Gaming on Linux
     ```sh
     bash /tmp/install.sh
     ```
-
-- **Easier, less secure way** — just download and run install script:
-
-  ```sh
-  wget -O - https://github.com/BenyHdezM/Debian4Gamers/raw/main/install.sh | bash
