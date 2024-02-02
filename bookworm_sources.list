@@ -1,0 +1,5 @@
+deb http://deb.debian.org/debian bookworm main non-free-firmware contrib non-free
+
+deb http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+
+deb http://deb.debian.org/debian bookworm-updates main non-free-firmware contrib non-free
