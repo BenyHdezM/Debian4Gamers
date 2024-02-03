@@ -75,7 +75,7 @@ sudo apt dist-upgrade -y
 echo -e "\n###############################################################
 ##    Installing firmwares, tools and Steam                  ##
 ###############################################################\n"
-sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer bash-completion
+sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools
 sudo apt clean
 
 
@@ -190,10 +190,12 @@ echo -e "\n###############################################################
 ##        Setting up WhiteSur gtk,icons,cursors themes       ##
 ###############################################################\n"
 
+  gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
   gsettings set org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
   gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
   gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
   gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
+  
   #TODO: Move Window Titlebars placement to the left
 fi
 
@@ -274,3 +276,9 @@ fi
 #TOD0: Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
 # sudo apt install fakeroot xorriso 
+
+#PROTONVPN
+#wget -O protonvpn.deb https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
+#sudo apt install ./protonvpn.deb
+#sudo apt-get update
+#sudo apt-get install proton-vpn-gnome-desktop
