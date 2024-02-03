@@ -57,7 +57,7 @@ fi
 ###############################################################################
 #                   Updating all the system                                   #
 ###############################################################################
-echo -e "###############################################################
+echo -e "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
@@ -66,23 +66,23 @@ sudo dpkg --add-architecture i386
 sudo rm /etc/apt/sources.list
 sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##    Upgrading the entire system preparation...             ##
 ###############################################################\n"
 sudo apt update
 sudo apt dist-upgrade -y
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##    Installing firmwares, tools and Steam                  ##
 ###############################################################\n"
-sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
+sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer bash-completion
 sudo apt clean
 
 
 ###############################################################################
 #                       Upgrading MESA VULKAN DRIVERS                         #
 ###############################################################################
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##   Installing MESA VULKAN DRIVERS whit rom amdgpu-install  ##
 ###############################################################\n"
 wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
@@ -95,7 +95,7 @@ sudo apt clean
 #                           Installing Extensions                             #
 ###############################################################################
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##          Downloading Gnome Extensions                     ##
 ###############################################################\n"
 sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
@@ -107,7 +107,7 @@ wget -O no-overviewfthx.zip https://extensions.gnome.org/extension-data/no-overv
 gnome-extensions install --force no-overviewfthx.zip
 rm no-overviewfthx.zip
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##          Installing Gnome Extensions                      ##
 ###############################################################\n"
 
@@ -134,7 +134,7 @@ gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 ###############################################################################
 #                   Installing Flatpak and Flathub Store                      #
 ###############################################################################
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##           Installing Flatpak and Flathub Store            ##
 ###############################################################\n"
 
@@ -146,7 +146,7 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 
 #Install Discord, Spotify and ProtonUp-Qt
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##         Installing Discord, Spotify and ProtonUp-Qt       ##
 ###############################################################\n"
 sudo flatpak install -y flathub com.discordapp.Discord
@@ -160,7 +160,7 @@ sudo flatpak install -y flathub com.spotify.Client
 if whiptail --title "Installing WhiteSur themes" --yesno "Do you want to install WhiteSur?" 8 78; then
   #WhiteSur gtk Installation
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##        Installing WhiteSur gtk,icons,cursors themes       ##
 ###############################################################\n"
 
@@ -186,7 +186,7 @@ echo -e "###############################################################
 #             Setting up WhiteSur gtk,icons,cursors themes                    #
 ###############################################################################
 
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##        Setting up WhiteSur gtk,icons,cursors themes       ##
 ###############################################################\n"
 
@@ -203,7 +203,7 @@ fi
 #                        Terminal and show-desktop                            #
 ###############################################################################
 if whiptail --title "Setting up Keybindings" --yesno "Do you want to setting up my keybindings configuration?" 8 78; then
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##    Setting up Keybindings for Terminal and Show-Desktop   ##
 ###############################################################\n"
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
@@ -215,7 +215,7 @@ fi
 
 #Disabling Hot Corner
 if whiptail --title "Disabling Hot Corner" --yesno "Do you wish to disable the Hot Corner?" 8 78; then
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##               Disabling Gnome-Shell Hot Corner            ##
 ###############################################################\n"
 gsettings set org.gnome.desktop.interface enable-hot-corners false
@@ -223,7 +223,7 @@ fi
 
 #GRUB FALLOUT THEME
 if whiptail --title "GRUB FALLOUT THEME" --yesno "Are you interested in installing the GRUB theme 'shvchk/grub-theme' from GitHub?" 8 78; then
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##            Setting up fallout-grub-theme English          ##
 ###############################################################\n"
 wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash
@@ -233,7 +233,7 @@ fi
 #                         Setting up xfce4-terminal                           #
 ###############################################################################
 if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing the xfce4-terminal? This terminal have a better look and performance" 8 78; then
-echo -e "###############################################################
+echo -e "\n###############################################################
 ##                  Setting up xfce4-terminal                ##
 ###############################################################\n"
 sudo apt install xfce4-terminal -y
@@ -241,7 +241,13 @@ sudo apt clean
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
 sudo apt remove --purge gnome-terminal -y
-wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
+  if [[ -e ~/.config/xfce4/terminal/terminalrc ]]; then
+    wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
+  else
+    mkdir -p ~/.config/xfce4/terminal/
+    wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
+  fi
+
 fi
 
 
