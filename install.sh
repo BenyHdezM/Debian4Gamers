@@ -4,6 +4,21 @@
 #                             Debian4Gamers                                   #
 ###############################################################################
 
+###############################################################################
+#                           DECLARED VARIABLES                                #
+###############################################################################
+
+if [[ -w "/root" ]]; then
+  echo "Do not run the script with root"
+  exit
+  #USER_NAME=$(id -nu 1000)
+else
+  USER_NAME=$(whoami)
+fi
+
+terminalName="gnome"
+
+###############################################################################
 echo -e "###############################################################
 ##                                                           ##
 ##                Script to Config Debian 12                 ##
@@ -12,14 +27,7 @@ echo -e "###############################################################
 ##                                                           ##
 ###############################################################\n"
 
-#Get Main User Name
-if [[ -w "/root" ]]; then
-  echo "Do not run the script with root"
-  exit
-  #USER_NAME=$(id -nu 1000)
-else
-  USER_NAME=$(whoami)
-fi
+
 
 ###############################################################################
 #                      Gnome-Terminal White on Black                          #
@@ -193,12 +201,10 @@ echo -e "###############################################################
   gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
 fi
 
-
-#TODO: Set gnome-terminal background color
-
-#Adding Keybinding for Terminal and show-desktop
+#Adding Keybinding for 
 ###############################################################################
 #                          Setting up Keybindings                             #
+#                        Terminal and show-desktop                            #
 ###############################################################################
 if whiptail --title "Setting up Keybindings" --yesno "Do you want to setting up my keybindings configuration?" 8 78; then
 echo -e "###############################################################
@@ -206,7 +212,7 @@ echo -e "###############################################################
 ###############################################################\n"
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
 fi
@@ -227,12 +233,30 @@ echo -e "###############################################################
 wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash
 fi
 
+###############################################################################
+#                         Setting up xfce4-terminal                           #
+###############################################################################
+if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing the xfce4-terminal? This terminal have a better look and performance" 8 78; then
+echo -e "###############################################################
+##                  Setting up xfce4-terminal                ##
+###############################################################\n"
+sudo apt install xfce4-terminal
+terminalName="xfce4"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
+sudo apt remove --purge gnome-terminal
+fi
 
+
+###############################################################################
+#                                 REBOOT                                      #
+###############################################################################
+sudo apt autoremove
 if whiptail --title "Installation Complete" --yesno "To apply changes, please reboot your system Would you like to reboot now?" 8 78; then
     sudo reboot
 else
     echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
+
 
 #TODO: Edit splash for Grub
 
