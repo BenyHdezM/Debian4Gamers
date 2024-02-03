@@ -95,11 +95,15 @@ cd ../WhiteSur-cursors
 sudo ./install.sh
 
 sudo rm -R /tmp/whitesur 
-##TODO: Set gtk themes, icons and cursor
 
+#Set gtk themes, icons and cursor
+settings set org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
+settings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
+settings set org.gnome.desktop.interface icon-theme 'WhiteSur'
+settings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
 fi
 
-#ADD Keyboard Shurtcut for Terminal
+#Adding Keybinding for Terminal and show-desktop
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
