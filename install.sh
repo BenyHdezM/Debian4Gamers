@@ -199,6 +199,7 @@ echo -e "###############################################################
   gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
   gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
   gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
+  #TODO: Move Window Titlebars placement to the left
 fi
 
 #Adding Keybinding for 
@@ -240,17 +241,17 @@ if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing t
 echo -e "###############################################################
 ##                  Setting up xfce4-terminal                ##
 ###############################################################\n"
-sudo apt install xfce4-terminal
+sudo apt install xfce4-terminal -y
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
-sudo apt remove --purge gnome-terminal
+sudo apt remove --purge gnome-terminal -y
 fi
 
 
 ###############################################################################
 #                                 REBOOT                                      #
 ###############################################################################
-sudo apt autoremove
+sudo apt autoremove -y
 if whiptail --title "Installation Complete" --yesno "To apply changes, please reboot your system Would you like to reboot now?" 8 78; then
     sudo reboot
 else
