@@ -1,5 +1,5 @@
 # Debian4Gamers
-A Simple Script to custom Debian 12 GNOME for best experience for Gaming on Linux
+Enhance your Debian 12 GNOME experience for gaming on Linux with this straightforward script.
 
 ### Installation / update
 
@@ -18,11 +18,13 @@ A Simple Script to custom Debian 12 GNOME for best experience for Gaming on Linu
     ```sh
     bash /tmp/install.sh
     ```
+    **Note:** Always exercise caution when executing scripts. Make sure to review the script and back up your data before significant changes
 <br>
 <hr>
 
 - **⚠️ WARNING:**  
-This script currently supports Debian 12 with the GNOME Desktop Environment. Feel free to customize it for your specific needs.
+
+  This script is currently tailored for Debian 12 with the GNOME Desktop Environment and supports AMD GPUs. Support for Nvidia GPUs is in progress and will be added soon. Feel free to customize the script for your specific needs.
 
 - **🚀 Getting Started:**
 
@@ -31,9 +33,11 @@ This script currently supports Debian 12 with the GNOME Desktop Environment. Fee
     Run the script to enjoy the benefits on your system.
 
 - **💡 Contribution:**
-We welcome contributions to make this script compatible with additional environments. Feel free to submit a pull request with your enhancements!
+
+  We welcome contributions to make this script compatible with additional environments. Feel free to submit a pull request with your enhancements!
 
 - **📝 Note:**
-Always review and understand the script before executing it on your system. Make sure to back up your data before making any significant changes.
 
-🙏 Thank you for your interest and contributions!
+  Always review and understand the script before executing it on your system. Make sure to back up your data before making any significant changes.
+
+  🙏 Thank you for your interest and contributions!
