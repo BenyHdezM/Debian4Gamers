@@ -35,7 +35,7 @@ sudo rm /etc/apt/sources.list
 sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
+sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
 
 #Upgrading MESA VULKAN DRIVERS from Debian Testing branch
 echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
@@ -97,10 +97,10 @@ sudo ./install.sh
 sudo rm -R /tmp/whitesur 
 
 #Set gtk themes, icons and cursor
-settings set org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
-settings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
-settings set org.gnome.desktop.interface icon-theme 'WhiteSur'
-settings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
+gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
+gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
+gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
 fi
 
 #TODO: Set gnome-terminal background color
