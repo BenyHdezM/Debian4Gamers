@@ -76,6 +76,7 @@ echo -e "###############################################################
 ##    Installing firmwares, tools and Steam                  ##
 ###############################################################\n"
 sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
+sudo apt clean
 
 
 ###############################################################################
@@ -88,17 +89,7 @@ wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_
 sudo apt install ./amdgpu-install.deb -y
 amdgpu-install --opencl=rocr -y
 rm amdgpu-install.deb
-
-
-###############################################################################
-#                   Rollback - remove Testing branch                          #
-###############################################################################
-echo -e "###############################################################
-##             Rollingback -> removing Testing branch        ##
-###############################################################\n"
-sudo rm /etc/apt/sources.list
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
-sudo apt update
+sudo apt clean
 
 ###############################################################################
 #                           Installing Extensions                             #
@@ -108,6 +99,7 @@ echo -e "###############################################################
 ##          Downloading Gnome Extensions                     ##
 ###############################################################\n"
 sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
+sudo apt clean
 
 #Install External Extensions
 cd /tmp
@@ -147,8 +139,8 @@ echo -e "###############################################################
 ###############################################################\n"
 
 #TODO: whiptail Selector for all flatpaks
-sudo apt install -y flatpak
-sudo apt install -y gnome-software-plugin-flatpak
+sudo apt install -y flatpak gnome-software-plugin-flatpak
+sudo apt clean 
 ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
@@ -167,26 +159,28 @@ sudo flatpak install -y flathub com.spotify.Client
 ###############################################################################
 if whiptail --title "Installing WhiteSur themes" --yesno "Do you want to install WhiteSur?" 8 78; then
   #WhiteSur gtk Installation
-  mkdir /tmp/whitesur
-  cd /tmp/whitesur
-  git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-  git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
-  git clone https://github.com/vinceliuice/WhiteSur-cursors.git
 
 echo -e "###############################################################
 ##        Installing WhiteSur gtk,icons,cursors themes       ##
 ###############################################################\n"
 
-  cd WhiteSur-gtk-theme
-  ./install.sh -i debian -l -N glassy
+  mkdir /tmp/whitesur
+  cd /tmp/whitesur
+  #GTK
+  git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+  ./WhiteSur-gtk-theme/install.sh -i debian -l -N glassy
+  rm -R WhiteSur-gtk-theme
   rm ~/.config/gtk-4.0/gtk.css
   ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
   ./tweaks.sh -F
   sudo flatpak override --filesystem=xdg-config/gtk-4.0
-  cd ../WhiteSur-icon-theme
-  ./install.sh
-  cd ../WhiteSur-cursors
-  sudo ./install.sh
+  #Icons
+  git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
+  ./WhiteSur-icon-theme/install.sh
+  rm -R WhiteSur-icon-theme
+  #Cursors
+  git clone https://github.com/vinceliuice/WhiteSur-cursors.git
+  sudo ./WhiteSur-cursors/install.sh
   sudo rm -R /tmp/whitesur 
 
 ###############################################################################
@@ -244,6 +238,7 @@ echo -e "###############################################################
 ##                  Setting up xfce4-terminal                ##
 ###############################################################\n"
 sudo apt install xfce4-terminal -y
+sudo apt clean
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
 sudo apt remove --purge gnome-terminal -y
