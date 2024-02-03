@@ -169,7 +169,7 @@ echo -e "###############################################################
   #GTK
   git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
   ./WhiteSur-gtk-theme/install.sh -i debian -l -N glassy
-  rm -R WhiteSur-gtk-theme
+  sudo rm -R WhiteSur-gtk-theme
   rm ~/.config/gtk-4.0/gtk.css
   ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
   ./tweaks.sh -F
@@ -177,11 +177,11 @@ echo -e "###############################################################
   #Icons
   git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
   ./WhiteSur-icon-theme/install.sh
-  rm -R WhiteSur-icon-theme
+  sudo rm -R WhiteSur-icon-theme
   #Cursors
   git clone https://github.com/vinceliuice/WhiteSur-cursors.git
   sudo ./WhiteSur-cursors/install.sh
-  sudo rm -R /tmp/whitesur 
+  sudo sudo rm -R /tmp/whitesur 
 
 ###############################################################################
 #             Setting up WhiteSur gtk,icons,cursors themes                    #
