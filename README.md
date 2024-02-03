@@ -1,5 +1,5 @@
 # Debian4Gamers
-Enhance your Debian 12 GNOME experience for gaming on Linux with this straightforward script.
+Optimize your gaming experience on Debian 12 GNOME with AMD GPUs using this simple and effective script.
 
 ### Installation / update
 
@@ -24,7 +24,9 @@ Enhance your Debian 12 GNOME experience for gaming on Linux with this straightfo
 
 - **⚠️ WARNING:**  
 
-  This script is currently tailored for Debian 12 with the GNOME Desktop Environment and supports AMD GPUs. Support for Nvidia GPUs is in progress and will be added soon. Feel free to customize the script for your specific needs.
+  This script is currently tailored for Debian 12 GNOME Desktop Environment and supports only for AMD GPUs.
+  
+  Support for Nvidia GPUs is in progress and will be added soon. Feel free to customize the script for your specific needs.
 
 - **🚀 Getting Started:**
 
