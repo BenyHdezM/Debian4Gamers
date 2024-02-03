@@ -2,7 +2,7 @@
 echo -e "##########################################
 ##                                      ##
 ##      Script to Config Debian 12      ##
-##      For Gaming Experience,          ##
+##      GNOME for Gaming Experience,    ##
 ##      by BenyHdez                     ##
 ##                                      ##
 ##########################################\n"
@@ -29,23 +29,39 @@ else
 fi
 
 #Install all dependencies for Gaming
-echo -e "$USER_NAME Insert now your USER password (not the root one, now you are a sudoer)\n" 
+echo -e "$USER_NAME Insert now your USER password ( you are a sudoer now )\n" 
 sudo dpkg --add-architecture i386
-sudo cp bookworm_sources.list /etc/apt/sources.list
+sudo rm /etc/apt/sources.list
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y firmware-amd-graphics nala mangohud git mesa-opencl-icd steam-installer
+sudo apt install -y firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
 
+#Upgrading MESA VULKAN DRIVERS from Debian Testing branch
+echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install -y mesa-vulkan-drivers
 
+#Rollback - remove Testing branch
+sudo rm /etc/apt/sources.list
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
+
+
 #Install Extensios
 sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
+sudo apt update
 
 # #Enable Extensions
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 gnome-extensions enable ubuntu-appindicators@ubuntu.com
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
+
+#Install External Extensions
+cd /tmp
+wget -O no-overviewfthx.zip https://extensions.gnome.org/extension-data/no-overviewfthx.v13.shell-extension.zip
+gnome-extensions install --force no-overviewfthx.zip
+gnome-extensions enable no-overview@fthx
+rm no-overviewfthx.zip
 
 #FLATPAK + FLATHUB
 sudo apt install -y flatpak
@@ -68,7 +84,9 @@ git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
 git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
 git clone https://github.com/vinceliuice/WhiteSur-cursors.git
 cd WhiteSur-gtk-theme
-./install.sh -i debian -l -c Light -N glassy
+./install.sh -i debian -l -N glassy
+rm ~/.config/gtk-4.0/gtk.css
+ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
 ./tweaks.sh -F
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
 cd ../WhiteSur-icon-theme
@@ -77,6 +95,8 @@ cd ../WhiteSur-cursors
 sudo ./install.sh
 
 sudo rm -R /tmp/whitesur 
+##TODO: Set gtk themes, icons and cursor
+
 fi
 
 #ADD Keyboard Shurtcut for Terminal
@@ -84,6 +104,10 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
+gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
+
+#Disable Hot Corner
+gsettings set org.gnome.desktop.interface enable-hot-corners false
 
 #GRUB FALLOUT SKIN
 wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash -s -- --lang English
