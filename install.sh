@@ -79,14 +79,15 @@ sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd 
 
 
 ###############################################################################
-#         Upgrading MESA VULKAN DRIVERS from Debian Testing branch            #
+#                       Upgrading MESA VULKAN DRIVERS                         #
 ###############################################################################
 echo -e "###############################################################
-##    Installing MESA VULKAN DRIVERS from Debian Testing     ##
+##   Installing MESA VULKAN DRIVERS whit rom amdgpu-install  ##
 ###############################################################\n"
-echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
-sudo apt update
-sudo apt install -y mesa-vulkan-drivers
+wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
+sudo apt install ./amdgpu-install.deb -y
+amdgpu-install --opencl=rocr -y
+rm amdgpu-install.deb
 
 
 ###############################################################################
@@ -145,6 +146,7 @@ echo -e "###############################################################
 ##           Installing Flatpak and Flathub Store            ##
 ###############################################################\n"
 
+#TODO: whiptail Selector for all flatpaks
 sudo apt install -y flatpak
 sudo apt install -y gnome-software-plugin-flatpak
 ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
@@ -245,6 +247,7 @@ sudo apt install xfce4-terminal -y
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
 sudo apt remove --purge gnome-terminal -y
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
 fi
 
 
@@ -258,13 +261,7 @@ else
     echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
 
-
 #TODO: Edit splash for Grub
-
-
-#TODO: SET AMDGPU-PRO 
-# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/focal/amdgpu-install_6.0.60001-1_all.deb
-# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
 
 #TODO: NVIDIA Support
 # Installing the appropriate GPU drivers
@@ -272,6 +269,7 @@ fi
 # For h.264 and h.265 export you also need the NVIDIA encode library:
 # sudo apt-get install libnvidia-encode1
 
+#TODO: SET AMDGPU-PRO 
 
 #TOD0: Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
