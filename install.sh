@@ -34,7 +34,7 @@ sudo dpkg --add-architecture i386
 sudo rm /etc/apt/sources.list
 sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
 sudo apt update
-sudo apt dist-upgrade
+sudo apt dist-upgrade -y
 sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer
 
 #Upgrading MESA VULKAN DRIVERS from Debian Testing branch
