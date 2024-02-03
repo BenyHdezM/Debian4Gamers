@@ -168,10 +168,10 @@ echo -e "\n###############################################################
   #GTK
   git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
   ./WhiteSur-gtk-theme/install.sh -i debian -l -N glassy
-  rm ~/.config/gtk-4.0/gtk.css
-  ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
   ./WhiteSur-gtk-theme/tweaks.sh -F
   sudo flatpak override --filesystem=xdg-config/gtk-4.0
+  rm ~/.config/gtk-4.0/gtk.css
+  ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
   sudo rm -R WhiteSur-gtk-theme
   #Icons
   git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
