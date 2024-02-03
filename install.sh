@@ -164,15 +164,14 @@ echo -e "###############################################################
 ##        Installing WhiteSur gtk,icons,cursors themes       ##
 ###############################################################\n"
 
-  mkdir /tmp/whitesur
-  cd /tmp/whitesur
+  cd /tmp/
   #GTK
   git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
   ./WhiteSur-gtk-theme/install.sh -i debian -l -N glassy
   sudo rm -R WhiteSur-gtk-theme
   rm ~/.config/gtk-4.0/gtk.css
   ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css
-  ./tweaks.sh -F
+  ./WhiteSur-gtk-theme/tweaks.sh -F
   sudo flatpak override --filesystem=xdg-config/gtk-4.0
   #Icons
   git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
@@ -180,8 +179,9 @@ echo -e "###############################################################
   sudo rm -R WhiteSur-icon-theme
   #Cursors
   git clone https://github.com/vinceliuice/WhiteSur-cursors.git
+  cd WhiteSur-cursors
   sudo ./WhiteSur-cursors/install.sh
-  sudo sudo rm -R /tmp/whitesur 
+  sudo sudo rm -R WhiteSur-cursors
 
 ###############################################################################
 #             Setting up WhiteSur gtk,icons,cursors themes                    #
@@ -242,7 +242,7 @@ sudo apt clean
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
 sudo apt remove --purge gnome-terminal -y
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
+wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
 fi
 
 
