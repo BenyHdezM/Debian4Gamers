@@ -80,16 +80,24 @@ sudo apt clean
 
 
 ###############################################################################
-#                       Upgrading MESA VULKAN DRIVERS                         #
+#               Upgrading MESA VULKAN DRIVERS from Testing branch             #
 ###############################################################################
 echo -e "\n###############################################################
 ##   Installing MESA VULKAN DRIVERS whit rom amdgpu-install  ##
 ###############################################################\n"
-wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
-sudo apt install ./amdgpu-install.deb -y
-amdgpu-install --opencl=rocr -y
-rm amdgpu-install.deb
-sudo apt clean
+echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install -y mesa-vulkan-drivers
+
+###############################################################################
+#                   Rollback - remove Testing branch                          #
+###############################################################################
+echo -e "###############################################################
+##             Rollingback -> removing Testing branch        ##
+###############################################################\n"
+sudo rm /etc/apt/sources.list
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
+sudo apt update
 
 ###############################################################################
 #                           Installing Extensions                             #
@@ -179,7 +187,7 @@ echo -e "\n###############################################################
   sudo rm -R WhiteSur-icon-theme
   #Cursors
   git clone https://github.com/vinceliuice/WhiteSur-cursors.git
-  sudo ./WhiteSur-cursors/install.sh
+  ./WhiteSur-cursors/install.sh
   sudo sudo rm -R WhiteSur-cursors
 
 ###############################################################################
@@ -271,7 +279,12 @@ fi
 # For h.264 and h.265 export you also need the NVIDIA encode library:
 # sudo apt-get install libnvidia-encode1
 
-#TODO: SET AMDGPU-PRO 
+#TODO: SET AMDGPU-PRO
+# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
+# sudo apt install ./amdgpu-install.deb -y
+# amdgpu-install --opencl=rocr -y
+# rm amdgpu-install.deb
+# sudo apt clean
 
 #TOD0: Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
