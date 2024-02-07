@@ -41,10 +41,11 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 #                             Add User to sudoers                             #
 ###############################################################################
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
-  echo -e "Hello $USER_NAME your User is already a Sudoers:\n"
-  echo -e "Removing $USER_NAME from Sudoers and exit"
-  sudo rm /etc/sudoers.d/$USER_NAME
-  exit
+  if whiptail --title "$USER_NAME is already a Sudoers" --yesno "Do you want to remove it from Sudoers?" 8 78; then
+    echo -e "Removing $USER_NAME from Sudoers and exit"
+    sudo rm /etc/sudoers.d/$USER_NAME
+    exit
+  fi  
 else
 echo -e "###############################################################
     Hello $USER_NAME, enter the ROOT password 
@@ -187,7 +188,9 @@ echo -e "\n###############################################################
   sudo rm -R WhiteSur-icon-theme
   #Cursors
   git clone https://github.com/vinceliuice/WhiteSur-cursors.git
-  ./WhiteSur-cursors/install.sh
+  cd WhiteSur-cursors
+  sudo ./install.sh
+  cd /tmp/
   sudo sudo rm -R WhiteSur-cursors
 
 ###############################################################################
@@ -242,7 +245,7 @@ fi
 ###############################################################################
 #                         Setting up xfce4-terminal                           #
 ###############################################################################
-if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing the xfce4-terminal? This terminal have a better look and performance" 8 78; then
+if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing the xfce4-terminal? This will replace the Default Terminal" 8 78; then
 echo -e "\n###############################################################
 ##                  Setting up xfce4-terminal                ##
 ###############################################################\n"
@@ -250,7 +253,7 @@ sudo apt install xfce4-terminal -y
 sudo apt clean
 terminalName="xfce4"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
-sudo apt remove --purge gnome-terminal -y
+sudo apt purge gnome-terminal gnome-console -y
   if [[ -e ~/.config/xfce4/terminal/terminalrc ]]; then
     wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
   else
@@ -270,6 +273,8 @@ if whiptail --title "Installation Complete" --yesno "To apply changes, please re
 else
     echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
+
+#TODO: Disable Gnome-Clasic-Xorg
 
 #TODO: Edit splash for Grub
 
