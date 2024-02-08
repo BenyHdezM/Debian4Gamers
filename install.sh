@@ -27,16 +27,6 @@ echo -e "###############################################################
 ##                                                           ##
 ###############################################################\n"
 
-
-
-###############################################################################
-#                      Gnome-Terminal White on Black                          #
-###############################################################################
-profileID=$(dconf list /org/gnome/terminal/legacy/profiles:/)
-echo $profileID
-gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/$profileID use-theme-colors false
-gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/$profileID background-color 'rgb(0,0,0)' 
-
 ###############################################################################
 #                             Add User to sudoers                             #
 ###############################################################################
