@@ -290,3 +290,7 @@ fi
 #sudo apt install ./protonvpn.deb
 #sudo apt-get update
 #sudo apt-get install proton-vpn-gnome-desktop
+
+#TODO FOR LAPTOPS: 
+#Install auto-cpufreq
+#install fingerprint 
