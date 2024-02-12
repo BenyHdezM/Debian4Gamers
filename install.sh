@@ -78,7 +78,7 @@ echo -e "\n###############################################################
 ###############################################################\n"
 echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
-sudo apt install -y mesa-vulkan-drivers
+sudo apt install -y mesa-vulkan-drivers linux-image-amd64 linux-headers-amd64
 
 ###############################################################################
 #                   Rollback - remove Testing branch                          #
