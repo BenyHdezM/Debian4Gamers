@@ -66,11 +66,11 @@ sudo apt dist-upgrade -y
 #               Upgrading MESA VULKAN DRIVERS from Testing branch             #
 ###############################################################################
 echo -e "\n###############################################################
-##   Installing MESA VULKAN DRIVERS whit rom amdgpu-install  ##
+##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
 echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
-sudo apt install -y mesa-vulkan-drivers linux-image-amd64 linux-headers-amd64
+sudo apt install -y mesa-vulkan-drivers
 
 echo -e "\n###############################################################
 ##    Installing firmwares, tools and Steam                  ##
