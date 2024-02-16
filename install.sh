@@ -44,7 +44,6 @@ echo -e "###############################################################
 su - root -c 'echo "'${USER_NAME}'  ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/'${USER_NAME}''
 fi
 
-
 ###############################################################################
 #                   Updating all the system                                   #
 ###############################################################################
@@ -63,13 +62,6 @@ echo -e "\n###############################################################
 sudo apt update
 sudo apt dist-upgrade -y
 
-echo -e "\n###############################################################
-##    Installing firmwares, tools and Steam                  ##
-###############################################################\n"
-sudo apt install -y neofetch firmware-amd-graphics mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools
-sudo apt clean
-
-
 ###############################################################################
 #               Upgrading MESA VULKAN DRIVERS from Testing branch             #
 ###############################################################################
@@ -79,6 +71,12 @@ echo -e "\n###############################################################
 echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install -y mesa-vulkan-drivers linux-image-amd64 linux-headers-amd64
+
+echo -e "\n###############################################################
+##    Installing firmwares, tools and Steam                  ##
+###############################################################\n"
+sudo apt install -y neofetch mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
+sudo apt clean
 
 ###############################################################################
 #                   Rollback - remove Testing branch                          #
@@ -129,7 +127,6 @@ fi
 #Enabling user-theme Extensions
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 
-
 ###############################################################################
 #                   Installing Flatpak and Flathub Store                      #
 ###############################################################################
@@ -143,7 +140,6 @@ sudo apt clean
 ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-
 #Install Discord, Spotify and ProtonUp-Qt
 echo -e "\n###############################################################
 ##         Installing Discord, Spotify and ProtonUp-Qt       ##
@@ -151,7 +147,6 @@ echo -e "\n###############################################################
 sudo flatpak install -y flathub com.discordapp.Discord
 sudo flatpak install -y flathub net.davidotek.pupgui2
 sudo flatpak install -y flathub com.spotify.Client
-
 
 ###############################################################################
 #                   Installing WhiteSur themes                                #
@@ -253,7 +248,6 @@ sudo apt purge gnome-terminal gnome-console -y
 
 fi
 
-
 ###############################################################################
 #                                 REBOOT                                      #
 ###############################################################################
@@ -263,6 +257,9 @@ if whiptail --title "Installation Complete" --yesno "To apply changes, please re
 else
     echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
+
+#TODO: Add AMD Firmware: 
+# https://askubuntu.com/questions/1124253/missing-firmware-for-amdgpu
 
 #TODO: Disable Gnome-Clasic-Xorg
 
