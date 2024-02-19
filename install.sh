@@ -263,6 +263,7 @@ sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtchar
 sudo apt clean
 cd ~/
 git clone https://gitlab.com/corectrl/corectrl.git
+git checkout 1.3-stable
 cd corectrl
 mkdir build
 cd build
