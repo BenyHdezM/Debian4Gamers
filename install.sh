@@ -256,7 +256,7 @@ echo -e "\n###############################################################
 ###############################################################\n"
 whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
 # Packages for compiling
-sudo apt install cmake extra-cmake-modules qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
+sudo apt install cmake extra-cmake-modules libquazip1-qt5-dev libspdlog-dev qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
 # Packages for running the application
 sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtcharts libbotan-2-19 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-platform -y
 # Download and build
