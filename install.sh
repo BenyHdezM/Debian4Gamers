@@ -245,7 +245,30 @@ sudo apt purge gnome-terminal gnome-console -y
     mkdir -p ~/.config/xfce4/terminal/
     wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
   fi
+fi
 
+###############################################################################
+#                         Compile and Install CoreCtrl                        #
+###############################################################################
+if whiptail --title "CoreCtrl" --yesno "Are you insterested on Compile and Install CoreCtrl?" 8 78; then
+echo -e "\n###############################################################
+##               Compile and Install CoreCtrl                ##
+###############################################################\n"
+whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
+# Packages for compiling
+sudo apt install cmake extra-cmake-modules qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
+# Packages for running the application
+sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtcharts libbotan-2-19 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-platform -y
+# Download and build
+sudo apt clean
+cd ~/
+git clone https://gitlab.com/corectrl/corectrl.git
+cd corectrl
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+make -j$(grep -c ^processor /proc/cpuinfo)
+sudo make install
 fi
 
 ###############################################################################
