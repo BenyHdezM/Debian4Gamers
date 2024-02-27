@@ -7,7 +7,9 @@
 ###############################################################################
 #                           DECLARED VARIABLES                                #
 ###############################################################################
+DesktopEnviroment="gnome"
 
+###############################################################################
 if [[ -w "/root" ]]; then
   echo "Do not run the script with root"
   exit
@@ -15,10 +17,6 @@ if [[ -w "/root" ]]; then
 else
   USER_NAME=$(whoami)
 fi
-
-terminalName="gnome"
-
-###############################################################################
 echo -e "###############################################################
 ##                                                           ##
 ##                Script to Config Debian 12                 ##
@@ -51,6 +49,8 @@ echo -e "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
+#Show git branch on Bashrc
+echo PS1="'"'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\e[91m\]$(__git_ps1)\[\e[00m\]$ '"'" | tee -a ~/.bashrc
 
 sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
 sudo rm /etc/apt/sources.list
@@ -216,7 +216,7 @@ echo -e "\n###############################################################
 ###############################################################\n"
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$DesktopEnviroment-terminal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
 fi
@@ -246,8 +246,8 @@ echo -e "\n###############################################################
 ###############################################################\n"
 sudo apt install xfce4-terminal -y
 sudo apt clean
-terminalName="xfce4"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$terminalName-terminal"
+DesktopEnviroment="xfce4"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$DesktopEnviroment-terminal"
 sudo apt purge gnome-terminal gnome-console -y
   if [[ -e ~/.config/xfce4/terminal/terminalrc ]]; then
     wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
@@ -255,8 +255,6 @@ sudo apt purge gnome-terminal gnome-console -y
     mkdir -p ~/.config/xfce4/terminal/
     wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
   fi
-#Add git branch on Bashrc
-echo PS1="'"'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\e[91m\]$(__git_ps1)\[\e[00m\]$ '"'" | tee -a ~/.bashrc
 fi
 
 ###############################################################################
