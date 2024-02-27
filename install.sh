@@ -52,7 +52,7 @@ print_log "\n###############################################################
 ###############################################################\n"
 sudo apt update
 
-InstallOptions=$(whiptail --separate-output --title "Check list example" --checklist \
+InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 78 10 \
   "1" "Install Drivers" ON \
   "2" "Install Extensions" OFF \
