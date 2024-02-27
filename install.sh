@@ -52,9 +52,9 @@ echo -e "\n###############################################################
     ( you are a sudoer now )!!                             
 ###############################################################\n"
 
-sudo dpkg --add-architecture i386
+sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
 sudo rm /etc/apt/sources.list
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
 
 echo -e "\n###############################################################
 ##    Upgrading the entire system preparation...             ##
@@ -85,7 +85,7 @@ echo -e "###############################################################
 ##             Rollingback -> removing Testing branch        ##
 ###############################################################\n"
 sudo rm /etc/apt/sources.list
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/bookworm_sources.list -O /etc/apt/sources.list
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
 sudo apt update
 
 ###############################################################################
@@ -111,9 +111,15 @@ echo -e "\n###############################################################
 whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Important: Please stay alert! Click 'INSTALL' in the next extension popups to proceed with the installation.
 Your quick action is needed for a smooth setup. Thank you!" 8 78
 #Installing Extensions
-if whiptail --title "Ubuntu-Appindicators" --yesno "Do you want to install ubuntu-appindicators extension?" 8 78; then
-  busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "ubuntu-appindicators@ubuntu.com"
-  gnome-extensions enable ubuntu-appindicators@ubuntu.com
+if whiptail --title "TrayIconsReloaded" --yesno "Do you want to install TrayIconsReloaded extension?" 8 78; then
+  cd /tmp
+  wget -O trayIconsReloaded.zip https://extensions.gnome.org/extension-data/trayIconsReloadedselfmade.pl.v26.shell-extension.zip
+  gnome-extensions install --force trayIconsReloaded.zip
+  rm trayIconsReloaded.zip
+  busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "trayIconsReloaded@selfmade.pl"
+  gnome-extensions enable trayIconsReloaded@selfmade.pl
+  # busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "ubuntu-appindicators@ubuntu.com"
+  # gnome-extensions enable ubuntu-appindicators@ubuntu.com
 fi
 if whiptail --title "Dash-To-Dock" --yesno "Do you want to install dash-to-dock extension?" 8 78; then
   busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "dash-to-dock@micxgx.gmail.com"
@@ -146,7 +152,11 @@ echo -e "\n###############################################################
 ###############################################################\n"
 sudo flatpak install -y flathub com.discordapp.Discord
 sudo flatpak install -y flathub net.davidotek.pupgui2
-sudo flatpak install -y flathub com.spotify.Client
+# sudo flatpak install -y flathub com.spotify.Client
+sudo flatpak install -y flathub com.usebottles.bottles
+sudo flatpak install -y flathub io.github.trigg.discover_overlay
+sudo flatpak install -y flathub com.dec05eba.gpu_screen_recorder
+# sudo flatpak install flathub org.pipewire.Helvum
 
 ###############################################################################
 #                   Installing WhiteSur themes                                #
@@ -245,6 +255,8 @@ sudo apt purge gnome-terminal gnome-console -y
     mkdir -p ~/.config/xfce4/terminal/
     wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
   fi
+#Add git branch on Bashrc
+echo PS1="'"'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\e[91m\]$(__git_ps1)\[\e[00m\]$ '"'" | tee -a ~/.bashrc
 fi
 
 ###############################################################################
@@ -270,6 +282,20 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
 make -j$(grep -c ^processor /proc/cpuinfo)
 sudo make install
+fi
+
+###############################################################################
+#                                 LiquidCtl                                   #
+###############################################################################
+if whiptail --title "LiquidCtl" --yesno "Do you want to Install LiquidCtl?" 8 78; then
+echo -e "\n###############################################################
+##                       Install LiquidCtl                   ##
+###############################################################\n"
+sudo apt install liquidctl
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/liquidcfg.service -O /etc/systemd/system/liquidcfg.service
+sudo systemctl daemon-reload
+sudo systemctl start liquidcfg
+sudo systemctl enable liquidcfg
 fi
 
 ###############################################################################
