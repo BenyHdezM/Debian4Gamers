@@ -33,12 +33,12 @@ print_log "###############################################################
 #                             Add User to sudoers                             #
 ###############################################################################
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
-skip
-  if whiptail --title "$USER_NAME is already a Sudoers" --yesno "Do you want to remove it from Sudoers?" 8 78; then
-    echo -e "Removing $USER_NAME from Sudoers and exit"
-    sudo rm /etc/sudoers.d/$USER_NAME
-    exit
-  fi
+  # if whiptail --title "$USER_NAME is already a Sudoers" --yesno "Do you want to remove it from Sudoers?" 8 78; then
+  #   echo -e "Removing $USER_NAME from Sudoers and exit"
+  #   sudo rm /etc/sudoers.d/$USER_NAME
+  #   exit
+  # fi
+  print_log "**⚠️ $USER_NAME is already a Sudoers ⚠️**"
 else
   print_log "###############################################################
     Hello $USER_NAME, enter the ROOT password 
