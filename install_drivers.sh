@@ -32,7 +32,9 @@ installDrivers() {
     ###############################################################################
     #                   Rollback - remove Testing branch                          #
     ###############################################################################
-    print_log "#################### Rollingback -> removing Testing branch ####################\n"
+    print_log "\n###############################################################
+##         Rollingback -> removing Testing branch            ##
+###############################################################\n"
     sudo rm /etc/apt/sources.list
     sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
     sudo apt update
