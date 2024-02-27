@@ -53,7 +53,7 @@ print_log "\n###############################################################
 sudo apt update
 
 InstallOptions=$(whiptail --separate-output --title "Check list example" --checklist \
-  "Choose user's permissions" 20 78 10 \
+  "Choose Installation Options" 20 78 10 \
   "1" "Install Drivers" ON \
   "2" "Install Extensions" OFF \
   "3" "Install Flatpak and Set Flathub Store" OFF \
