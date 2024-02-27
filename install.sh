@@ -278,7 +278,11 @@ cd corectrl
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
-make -j$(grep -c ^processor /proc/cpuinfo)
+# Get the number of processors and subtract two
+num_processors=$(grep -c ^processor /proc/cpuinfo)
+num_jobs=$((num_processors - 2))
+make -j$num_jobs #Run make with the set number of jobs
+
 sudo make install
 fi
 
