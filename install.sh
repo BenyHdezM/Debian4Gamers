@@ -15,7 +15,7 @@ print_log() {
 
 ###############################################################################
 if [[ -w "/root" ]]; then
-  echo "Do not run the script with root"
+  print_log "Do not run the script with root"
   exit
   #USER_NAME=$(id -nu 1000)
 else
@@ -33,6 +33,7 @@ print_log "###############################################################
 #                             Add User to sudoers                             #
 ###############################################################################
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
+skip
   if whiptail --title "$USER_NAME is already a Sudoers" --yesno "Do you want to remove it from Sudoers?" 8 78; then
     echo -e "Removing $USER_NAME from Sudoers and exit"
     sudo rm /etc/sudoers.d/$USER_NAME
@@ -128,18 +129,8 @@ fi
 
 #TODO: Edit splash for Grub
 
-#TODO: NVIDIA Support
-# Installing the appropriate GPU drivers
-# sudo apt-get install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
-# For h.264 and h.265 export you also need the NVIDIA encode library:
-# sudo apt-get install libnvidia-encode1
 
-#TODO: SET AMDGPU-PRO
-# wget https://repo.radeon.com/amdgpu-install/23.40.1/ubuntu/jammy/amdgpu-install_6.0.60001-1_all.deb -O amdgpu-install.deb
-# sudo apt install ./amdgpu-install.deb -y
-# amdgpu-install --opencl=rocr -y
-# rm amdgpu-install.deb
-# sudo apt clean
+
 
 #TOD0: Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
