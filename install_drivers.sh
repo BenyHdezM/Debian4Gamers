@@ -24,7 +24,8 @@ installMesaDrivers() {
 ###############################################################\n"
     switchToTestingSource
     sudo nala update
-    sudo nala install mesa-vulkan-drivers
+    sudo nala install mesa-vulkan-drivers steam-libs steam-libs-i386 steam-devices
+    sudo nala install steam-installer
     rollBackSource
 }
 
@@ -37,11 +38,11 @@ installSteamAndTools() {
 }
 
 switchToTestingSource() {
-    echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
+    sudo echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 }
 
 switchToSidSource() {
-    echo "deb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
+    sudo echo "deb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
 }
 
 rollBackSource() {
