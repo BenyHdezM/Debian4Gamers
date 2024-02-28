@@ -24,12 +24,11 @@ installMesaDrivers() {
     print_log "\n###############################################################
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
+    installSteamAndTools
     switchToTestingSource
     sudo apt update
     sudo apt install -y mesa-vulkan-drivers
-
-    installSteamAndTools
-
+    rollBackSource
 }
 
 installSteamAndTools() {
@@ -37,7 +36,6 @@ installSteamAndTools() {
     sudo apt install -y neofetch mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
     sudo apt clean
     enableSteamPlay
-    rollBackSource
 }
 
 switchToTestingSource() {
@@ -93,6 +91,7 @@ installDrivers() {
 ###############################################################\n"
     sudo apt update
     sudo apt dist-upgrade -y
+    sudo apt autoremove -y
 
     # Search for graphics cards in the system using lspci
     gpu_info=$(lspci | grep -i vga)

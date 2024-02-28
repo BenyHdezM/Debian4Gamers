@@ -51,7 +51,7 @@ print_log "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
-sudo apt update
+sudo echo #Get password
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 78 10 \
