@@ -2,9 +2,9 @@
 
 installNvidiaDrivers() {
     # Installing the appropriate GPU drivers
-    sudo apt-get install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
+    sudo nala install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
     # For h.264 and h.265 export you also need the NVIDIA encode library:
-    sudo apt-get install libnvidia-encode1
+    sudo nala install libnvidia-encode1
 }
 
 installAMDPRO() {
@@ -23,8 +23,8 @@ installMesaDrivers() {
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
     switchToTestingSource
-    sudo apt update
-    sudo apt install -y mesa-vulkan-drivers
+    sudo nala update
+    sudo nala install mesa-vulkan-drivers
     rollBackSource
 }
 
