@@ -118,20 +118,19 @@ else
   done
 fi
 
-
-print_log "\n###############################################################
+if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the latest GPU drivers on your system? This will install MESA from the testing branch or Nvidia-Drivers depending on your GPU chipset." 8 78; then
+  print_log "\n###############################################################
 ##                     Installing Latest GPU Drivers                ##
 ###############################################################\n"
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
-source /tmp/install_drivers.sh
-installGpuDrivers
+  sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
+  source /tmp/install_drivers.sh
+  installGpuDrivers
+fi
 
 ###############################################################################
 #                                 REBOOT                                      #
 ###############################################################################
 sudo apt autoremove -y
-
-
 
 if whiptail --title "Installation Complete" --yesno "To apply changes, please reboot your system Would you like to reboot now?" 8 78; then
   sudo reboot
