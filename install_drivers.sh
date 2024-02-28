@@ -23,6 +23,8 @@ installMesaDrivers() {
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
     sudo apt purge steam-* -y
+    sudo apt autoremove
+    sudo apt clean
     switchToTestingSource
     sudo apt update
     # sudo apt install mesa-vulkan-drivers steam-libs steam-libs-i386 steam-devices
