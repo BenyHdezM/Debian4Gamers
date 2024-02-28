@@ -49,7 +49,6 @@ installSteamAndTools() {
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
     sudo apt install -y neofetch mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
     sudo apt clean
-    enableSteamPlay
 }
 
 switchToTestingSource() {
