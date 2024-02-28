@@ -28,11 +28,16 @@ installMesaDrivers() {
     sudo apt update
     sudo apt install -y mesa-vulkan-drivers
 
+    installSteamAndTools
+
+}
+
+installSteamAndTools() {
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
     sudo apt install -y neofetch mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
     sudo apt clean
+    enableSteamPlay
     rollBackSource
-
 }
 
 switchToTestingSource() {
@@ -54,6 +59,24 @@ rollBackSource() {
     sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
     sudo apt update
     sudo apt autoremove -y
+}
+
+enableSteamPlay() {
+    # Path to the Steam configuration file
+    steam_cfg="$HOME/.steam/steam.cfg"
+
+    # Check if the configuration file exists
+    if ! [ -f "$steam_cfg" ]; then
+        # Add configuration lines to enable Steam Play if they don't already exist
+        if ! grep -q 'SteamCompat' "$steam_cfg"; then
+            echo -e "\n[SteamCompat]" >>"$steam_cfg"
+            echo ' "enable" = "true"' >>"$steam_cfg"
+            print_log "Steam Play has been enabled for all titles."
+        else
+            print_log "Steam Play is already enabled in the Steam configuration file."
+        fi
+    fi
+
 }
 
 installDrivers() {
