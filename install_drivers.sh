@@ -56,24 +56,6 @@ rollBackSource() {
     sudo apt autoremove -y
 }
 
-enableSteamPlay() {
-    # Path to the Steam configuration file
-    steam_cfg="$HOME/.steam/steam.cfg"
-
-    # Check if the configuration file exists
-    if ! [ -f "$steam_cfg" ]; then
-        # Add configuration lines to enable Steam Play if they don't already exist
-        if ! grep -q 'SteamCompat' "$steam_cfg"; then
-            echo -e "\n[SteamCompat]" >>"$steam_cfg"
-            echo ' "enable" = "true"' >>"$steam_cfg"
-            print_log "Steam Play has been enabled for all titles."
-        else
-            print_log "Steam Play is already enabled in the Steam configuration file."
-        fi
-    fi
-
-}
-
 installGpuDrivers() {
     ###############################################################################
     #                   Updating all the system                                   #
