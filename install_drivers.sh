@@ -29,6 +29,7 @@ installMesaDrivers() {
 }
 
 installSteamAndTools() {
+    upgradeSystem
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
     sudo apt install -y neofetch mangohud git mesa-opencl-icd steam-installer bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
     sudo apt clean
@@ -56,7 +57,7 @@ rollBackSource() {
     sudo apt autoremove -y
 }
 
-installGpuDrivers() {
+upgradeSystem(){
     ###############################################################################
     #                   Updating all the system                                   #
     ###############################################################################
@@ -71,7 +72,10 @@ installGpuDrivers() {
     sudo apt update
     sudo apt dist-upgrade -y
     sudo apt autoremove -y
+}
 
+
+installGpuDrivers() {
     # Search for graphics cards in the system using lspci
     gpu_info=$(lspci | grep -i vga)
     # Check GPU manufacturer
