@@ -1,17 +1,23 @@
 #! /usr/bin/env bash
 
-updateGrub() {
-    # Path to GRUB configuration file
-    GRUB_CONFIG_FILE="/etc/default/grub"
+enablelFullAmdGpuControl() {
+    gpu_info=$(lspci | grep -i vga)
+    # Check GPU manufacturer
+    if [[ "$gpu_info" == *AMD* || "$gpu_info" == *amd* ]]; then
+        print_log "**⚠️ Enable Full AMD GPU controls - Grub Update⚠️**"
 
-    # New line to be inserted
-    NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff"'
+        # Path to GRUB configuration file
+        GRUB_CONFIG_FILE="/etc/default/grub"
 
-    # Replace line in GRUB configuration file
-    sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
-    sudo update-grub
+        # New line to be inserted
+        NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff"'
 
-    print_log "GRUB configuration updated successfully."
+        # Replace line in GRUB configuration file
+        sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
+        sudo update-grub
+
+        print_log "**⚠️ GRUB configuration updated successfully. ⚠️**"
+    fi
 }
 
 installCoreCtrl() {
@@ -38,7 +44,7 @@ installCoreCtrl() {
         make -j$num_jobs #Run make with the set number of jobs
         sudo make install
         sudo rm -r /tmp/corectrl
-        updateGrub
+        enablelFullAmdGpuControl
     fi
 }
 
