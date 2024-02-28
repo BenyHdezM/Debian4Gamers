@@ -58,26 +58,31 @@ rollBackSource() {
 }
 
 installGpuDrivers() {
-    # Search for graphics cards in the system using lspci
-    gpu_info=$(lspci | grep -i vga)
-    # Check GPU manufacturer
-    case "$gpu_info" in
-    *AMD* | *amd*)
-        print_log "**⚠️ An AMD graphics card was detected. ⚠️**"
-        installMesaDrivers
-        ;;
-    *NVIDIA* | *nvidia*)
-        print_log "**⚠️ A NVIDIA graphics card was detected. ⚠️**"
-        installNvidiaDrivers
-        ;;
-    *Intel* | *intel*)
-        print_log "**⚠️ An Intel GPU was detected. ⚠️**"
-        installMesaDrivers
-        ;;
-    *)
-        print_log "**⚠️ Unknown or no dedicated GPU detected. Installing Mesa drivers. ⚠️**"
-        installMesaDrivers
-        ;;
-    esac
-
+    if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the latest GPU drivers on your system? This will entail installing MESA from the testing branch or Nvidia-Drivers, depending on your GPU chipset.\
+    Please note that this feature is experimental, and while it could potentially enhance performance in many games, particularly those utilizing Ray Tracing, it may not be fully stable. Therefore, I don't recommend it for general use." 20 78; then
+        print_log "\n###############################################################
+##                     Installing Latest GPU Drivers                ##
+###############################################################\n"
+        # Search for graphics cards in the system using lspci
+        gpu_info=$(lspci | grep -i vga)
+        # Check GPU manufacturer
+        case "$gpu_info" in
+        *AMD* | *amd*)
+            print_log "**⚠️ An AMD graphics card was detected. ⚠️**"
+            installMesaDrivers
+            ;;
+        *NVIDIA* | *nvidia*)
+            print_log "**⚠️ A NVIDIA graphics card was detected. ⚠️**"
+            installNvidiaDrivers
+            ;;
+        *Intel* | *intel*)
+            print_log "**⚠️ An Intel GPU was detected. ⚠️**"
+            installMesaDrivers
+            ;;
+        *)
+            print_log "**⚠️ Unknown or no dedicated GPU detected. Installing Mesa drivers. ⚠️**"
+            installMesaDrivers
+            ;;
+        esac
+    fi
 }

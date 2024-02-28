@@ -1,5 +1,19 @@
 #! /usr/bin/env bash
 
+updateGrub() {
+    # Path to GRUB configuration file
+    GRUB_CONFIG_FILE="/etc/default/grub"
+
+    # New line to be inserted
+    NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff"'
+
+    # Replace line in GRUB configuration file
+    sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
+    sudo update-grub
+
+    print_log "GRUB configuration updated successfully."
+}
+
 installCoreCtrl() {
     ###############################################################################
     #                         Compile and Install CoreCtrl                        #
@@ -10,7 +24,7 @@ installCoreCtrl() {
 ###############################################################\n"
 
         whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
-         # Download and build
+        # Download and build
         cd /tmp
         git clone https://gitlab.com/corectrl/corectrl.git
         cd /tmp/corectrl
@@ -24,6 +38,7 @@ installCoreCtrl() {
         make -j$num_jobs #Run make with the set number of jobs
         sudo make install
         sudo rm -r /tmp/corectrl
+        updateGrub
     fi
 }
 

@@ -53,12 +53,12 @@ print_log "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
-
+sudo rm -r /tmp/*
 upgradeSystem
 installDependencies
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
-  "Choose Installation Options" 15 100 8 \
+  "Choose Installation Options" 15 100 10 \
   "1" "Install Steam, MangoHud and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install Flatpak and Set Flathub Store ( Recommended ) " ON \
@@ -66,7 +66,8 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "5" "Install CoreCtrl ( OC ) " ON \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
   "7" "Install DisplayLink Driver ( Extra ) " OFF \
-  "8" "Install Visual Studio Code ( Extra ) " OFF 3>&1 1>&2 2>&3)
+  "8" "Install Visual Studio Code ( Extra ) " OFF \
+  "9" "Install GPU Latest Drivers ( EXperimental ) " OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -114,21 +115,17 @@ else
       source /tmp/install_extras.sh
       installVSCode
       ;;
+    "9")
+      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
+      source /tmp/install_drivers.sh
+      installGpuDrivers
+      ;;
     *)
       echo "Unsupported item $Options!" >&2
       exit 1
       ;;
     esac
   done
-fi
-
-if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the latest GPU drivers on your system? This will install MESA from the testing branch or Nvidia-Drivers depending on your GPU chipset." 20 78; then
-  print_log "\n###############################################################
-##                     Installing Latest GPU Drivers                ##
-###############################################################\n"
-  sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
-  source /tmp/install_drivers.sh
-  installGpuDrivers
 fi
 
 ###############################################################################
