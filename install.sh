@@ -55,7 +55,7 @@ sudo echo #Get password
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 78 10 \
-  "1" "Install Drivers" ON \
+  "1" "Install Steam, Drivers and Firmwares" ON \
   "2" "Install Extensions" OFF \
   "3" "Install Flatpak and Set Flathub Store" OFF \
   "4" "Install WhiteSur and Gnome Configs" OFF \
@@ -73,7 +73,7 @@ else
     "1")
       sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
       source /tmp/install_drivers.sh
-      installDrivers
+      installSteamAndTools
       ;;
     "2")
       sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extensions.sh -O /tmp/install_extensions.sh
@@ -118,10 +118,21 @@ else
   done
 fi
 
+
+print_log "\n###############################################################
+##                     Installing Latest GPU Drivers                ##
+###############################################################\n"
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
+source /tmp/install_drivers.sh
+installGpuDrivers
+
 ###############################################################################
 #                                 REBOOT                                      #
 ###############################################################################
 sudo apt autoremove -y
+
+
+
 if whiptail --title "Installation Complete" --yesno "To apply changes, please reboot your system Would you like to reboot now?" 8 78; then
   sudo reboot
 else

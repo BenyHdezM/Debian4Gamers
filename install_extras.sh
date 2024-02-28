@@ -1,26 +1,5 @@
 #! /usr/bin/env bash
 
-switchToTestingSource() {
-    echo "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
-}
-
-switchToSidSource() {
-    echo "deb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
-}
-
-rollBackSource() {
-    ###############################################################################
-    #                   Rollback - remove Testing branch                          #
-    ###############################################################################
-    print_log "\n###############################################################
-##         Rollingback -> removing Testing branch            ##
-###############################################################\n"
-    sudo rm /etc/apt/sources.list
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
-    sudo apt update
-    sudo apt autoremove -y
-}
-
 installCoreCtrl() {
     ###############################################################################
     #                         Compile and Install CoreCtrl                        #
@@ -29,7 +8,7 @@ installCoreCtrl() {
         print_log "\n###############################################################
 ##               Compile and Install CoreCtrl                ##
 ###############################################################\n"
-        switchToTestingSource
+
         whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
         # Packages for compiling
         sudo apt install cmake extra-cmake-modules libquazip1-qt5-dev libspdlog-dev qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
@@ -37,7 +16,7 @@ installCoreCtrl() {
         sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtcharts libbotan-2-19 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-platform -y
         # Download and build
         sudo apt clean
-        rollBackSource
+
         cd ~/
         git clone https://gitlab.com/corectrl/corectrl.git
         cd corectrl
@@ -51,7 +30,7 @@ installCoreCtrl() {
         make -j$num_jobs #Run make with the set number of jobs
 
         sudo make install
-        
+
     fi
 }
 

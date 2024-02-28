@@ -1,12 +1,10 @@
 #! /usr/bin/env bash
 
 installNvidiaDrivers() {
-    switchToTestingSource
     # Installing the appropriate GPU drivers
     sudo apt-get install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
     # For h.264 and h.265 export you also need the NVIDIA encode library:
     sudo apt-get install libnvidia-encode1
-    rollBackSource
 }
 
 installAMDPRO() {
@@ -24,7 +22,6 @@ installMesaDrivers() {
     print_log "\n###############################################################
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
-    installSteamAndTools
     switchToTestingSource
     sudo apt update
     sudo apt install -y mesa-vulkan-drivers
@@ -77,7 +74,7 @@ enableSteamPlay() {
 
 }
 
-installDrivers() {
+installGpuDrivers() {
     ###############################################################################
     #                   Updating all the system                                   #
     ###############################################################################
