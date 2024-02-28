@@ -1,5 +1,21 @@
 #! /usr/bin/env bash
 
+upgradeSystem(){
+    ###############################################################################
+    #                   Updating all the system                                   #
+    ###############################################################################
+    sudo rm /etc/apt/sources.list
+    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
+
+    print_log "\n###############################################################
+##    Upgrading the entire system preparation...             ##
+###############################################################\n"
+    sudo apt update
+    sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
+    sudo apt dist-upgrade -y
+    sudo apt autoremove -y
+}
+
 installNvidiaDrivers() {
     # Installing the appropriate GPU drivers
     sudo apt-get install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
@@ -56,24 +72,6 @@ rollBackSource() {
     sudo apt update
     sudo apt autoremove -y
 }
-
-upgradeSystem(){
-    ###############################################################################
-    #                   Updating all the system                                   #
-    ###############################################################################
-
-    sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
-    sudo rm /etc/apt/sources.list
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
-
-    print_log "\n###############################################################
-##    Upgrading the entire system preparation...             ##
-###############################################################\n"
-    sudo apt update
-    sudo apt dist-upgrade -y
-    sudo apt autoremove -y
-}
-
 
 installGpuDrivers() {
     # Search for graphics cards in the system using lspci
