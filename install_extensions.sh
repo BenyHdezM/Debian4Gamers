@@ -8,9 +8,6 @@ installExtensions() {
     print_log "\n###############################################################
 ##          Downloading Gnome Extensions                     ##
 ###############################################################\n"
-    sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
-    sudo apt clean
-
     #Install External Extensions
     cd /tmp
     wget -O no-overviewfthx.zip https://extensions.gnome.org/extension-data/no-overviewfthx.v13.shell-extension.zip

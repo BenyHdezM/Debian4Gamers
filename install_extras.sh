@@ -10,16 +10,10 @@ installCoreCtrl() {
 ###############################################################\n"
 
         whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
-        # Packages for compiling
-        sudo apt install cmake extra-cmake-modules libquazip1-qt5-dev libspdlog-dev qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
-        # Packages for running the application
-        sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtcharts libbotan-2-19 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-platform -y
-        # Download and build
-        sudo apt clean
-
-        cd ~/
+         # Download and build
+        cd /tmp
         git clone https://gitlab.com/corectrl/corectrl.git
-        cd corectrl
+        cd /tmp/corectrl
         git checkout 1.3-stable
         mkdir build
         cd build
@@ -28,9 +22,8 @@ installCoreCtrl() {
         num_processors=$(grep -c ^processor /proc/cpuinfo)
         num_jobs=$((num_processors - 2))
         make -j$num_jobs #Run make with the set number of jobs
-
         sudo make install
-
+        sudo rm -r /tmp/corectrl
     fi
 }
 

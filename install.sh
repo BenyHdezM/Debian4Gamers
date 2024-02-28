@@ -7,6 +7,8 @@
 ###############################################################################
 #                           DECLARED VARIABLES                                #
 ###############################################################################
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/utils.sh -O /tmp/utils.sh
+source /tmp/utils.sh
 DesktopEnviroment="gnome"
 
 print_log() {
@@ -51,11 +53,13 @@ print_log "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
-sudo echo #Get password
+
+upgradeSystem
+installDependencies
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 78 10 \
-  "1" "Install Steam, Drivers and Firmwares" ON \
+  "1" "Install Steam, MangoHud and Tools" ON \
   "2" "Install Extensions" OFF \
   "3" "Install Flatpak and Set Flathub Store" OFF \
   "4" "Install WhiteSur and Gnome Configs" OFF \
