@@ -65,6 +65,10 @@ installGnomeTheme() {
         gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
     fi
 
+    if whiptail --title "Setting Input Source" --yesno "Do you have an English Keyboard and do you want the letter Ñ using <alt+n> ?" 10 78; then
+        gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+intl')]"
+    fi
+
     #Disabling Hot Corner
     if whiptail --title "Disabling Hot Corner" --yesno "Do you wish to disable the Hot Corner?" 8 78; then
         print_log "\n###############################################################
