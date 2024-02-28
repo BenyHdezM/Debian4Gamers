@@ -20,9 +20,9 @@ installFlatpak() {
 ###############################################################\n"
     sudo flatpak install -y flathub com.discordapp.Discord
     sudo flatpak install -y flathub net.davidotek.pupgui2
-    # sudo flatpak install -y flathub com.spotify.Client
+    sudo flatpak install -y flathub com.spotify.Client
     sudo flatpak install -y flathub com.usebottles.bottles
     sudo flatpak install -y flathub io.github.trigg.discover_overlay
     sudo flatpak install -y flathub com.dec05eba.gpu_screen_recorder
-    # sudo flatpak install flathub org.pipewire.Helvum
+    sudo flatpak install -y flathub org.pipewire.Helvum
 }

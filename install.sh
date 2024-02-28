@@ -61,7 +61,8 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "4" "Install WhiteSur and Gnome Configs" OFF \
   "5" "Install CoreCtrl" OFF \
   "6" "Install LiquidCtl" OFF \
-  "7" "Install DisplayLink" OFF 3>&1 1>&2 2>&3)
+  "7" "Install DisplayLink" OFF \
+  "7" "Install Visual Studio Code" OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -104,6 +105,11 @@ else
       source /tmp/install_extras.sh
       installDisplayLink
       ;;
+    "8")
+      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
+      source /tmp/install_extras.sh
+      installVSCode
+      ;;
     *)
       echo "Unsupported item $Options!" >&2
       exit 1
@@ -128,9 +134,6 @@ fi
 #TODO: Disable Gnome-Clasic-Xorg
 
 #TODO: Edit splash for Grub
-
-
-
 
 #TOD0: Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
