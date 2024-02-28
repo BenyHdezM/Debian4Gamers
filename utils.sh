@@ -16,6 +16,20 @@ upgradeSystem() {
     sudo apt autoremove -y
 }
 
+vaapiOnFirefox() {
+    # Define the preference setting
+    PREFERENCE_SETTING='user_pref("media.ffmpeg.vaapi.enabled", true);'
+
+    # Path to the Firefox preferences file
+    PREFS_FILE="$HOME/.mozilla/firefox/*.default/prefs.js"
+
+    # Check if the preferences file exists
+    if [ -f "$PREFS_FILE" ]; then
+        # Update the preference setting in the Firefox preferences file
+        sed -i "/media.ffmpeg.vaapi.enabled/c\\$PREFERENCE_SETTING" "$PREFS_FILE"
+    fi
+}
+
 installDependencies() {
     print_log "\n###############################################################
 ##                Installing Dependencies                    ##
@@ -28,4 +42,5 @@ installDependencies() {
     sudo apt install qml-module-qtquick2 qml-module-qtquick-extras qml-module-qtcharts libbotan-2-19 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-platform -y
     sudo apt clean
     sudo apt autoremove
+    vaapiOnFirefox
 }
