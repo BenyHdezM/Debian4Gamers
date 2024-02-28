@@ -7,8 +7,7 @@
 ###############################################################################
 #                           DECLARED VARIABLES                                #
 ###############################################################################
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/utils.sh -O /tmp/utils.sh
-source /tmp/utils.sh
+
 DesktopEnviroment="gnome"
 
 print_log() {
@@ -54,11 +53,13 @@ print_log "\n###############################################################
     ( you are a sudoer now )!!                             
 ###############################################################\n"
 sudo rm -r /tmp/*
+sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/utils.sh -O /tmp/utils.sh
+source /tmp/utils.sh
 upgradeSystem
 installDependencies
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
-  "Choose Installation Options" 15 100 10 \
+  "Choose Installation Options" 15 70 10 \
   "1" "Install Steam, MangoHud and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install Flatpak and Set Flathub Store ( Recommended ) " ON \
