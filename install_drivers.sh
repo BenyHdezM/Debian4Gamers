@@ -22,10 +22,13 @@ installMesaDrivers() {
     print_log "\n###############################################################
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
+    sudo apt purge steam-* -y
     switchToTestingSource
-    sudo nala update
-    sudo nala install mesa-vulkan-drivers steam-libs steam-libs-i386 steam-devices
-    sudo nala install steam-installer
+    sudo apt update
+    # sudo apt install mesa-vulkan-drivers steam-libs steam-libs-i386 steam-devices
+    wget https://cdn.akamai.steamstatic.com/client/installer/steam.deb
+    sudo apt install ./steam.deb
+    rm steam.deb
     rollBackSource
 }
 
