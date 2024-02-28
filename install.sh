@@ -62,7 +62,7 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "5" "Install CoreCtrl" OFF \
   "6" "Install LiquidCtl" OFF \
   "7" "Install DisplayLink" OFF \
-  "7" "Install Visual Studio Code" OFF 3>&1 1>&2 2>&3)
+  "8" "Install Visual Studio Code" OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
