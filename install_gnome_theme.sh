@@ -58,9 +58,12 @@ installGnomeTheme() {
         print_log "\n###############################################################
 ##    Setting up Keybindings for Terminal and Show-Desktop   ##
 ###############################################################\n"
+        sudo apt purge gnome-terminal -y
+        sudo apt autoremove -y
+        sudo apt install kgx -y
         gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
         gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
-        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$DesktopEnviroment-terminal"
+        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$kgx"
         gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
         gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
     fi
@@ -84,24 +87,5 @@ installGnomeTheme() {
 ###############################################################\n"
         wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash
     fi
-
-    ###############################################################################
-    #                         Setting up xfce4-terminal                           #
-    ###############################################################################
-    if whiptail --title "xfce4-terminal" --yesno "Are you interested in installing the xfce4-terminal? This will replace the Default Terminal" 8 78; then
-        print_log "\n###############################################################
-##                  Setting up xfce4-terminal                ##
-###############################################################\n"
-        sudo apt install xfce4-terminal -y
-        sudo apt clean
-        DesktopEnviroment="xfce4"
-        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$DesktopEnviroment-terminal"
-        sudo apt purge gnome-terminal gnome-console -y
-        if [[ -e ~/.config/xfce4/terminal/terminalrc ]]; then
-            wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
-        else
-            mkdir -p ~/.config/xfce4/terminal/
-            wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/terminalrc -O ~/.config/xfce4/terminal/terminalrc
-        fi
-    fi
+    
 }
