@@ -1,7 +1,16 @@
 # Debian4Gamers
 Optimize your gaming experience on Debian 12 GNOME with AMD, Nvidia(Experimental) and Intel GPUs using this simple and effective script.
 
-### Installation / update
+Example of Debian4Gamer full Script installed
+
+<img src="https://raw.githubusercontent.com/BenyHdezM/Debian4Gamers/main/images/desktop_sample.jpg" width="480" alt="Example of Debian4Gamer installed"/>
+
+Example of Script running
+
+<img src="https://raw.githubusercontent.com/BenyHdezM/Debian4Gamers/main/images/running_sample.jpg" width="480" alt="Example of script running"/>
+
+
+### Installation
 
 - **Secure way:**
 
