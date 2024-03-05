@@ -32,7 +32,7 @@ installMesaDrivers() {
 installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
-    sudo apt install -y mangohud steam-installer gamemode
+    sudo apt install -y mangohud steam-installer gamemode mpv
     # TODO: OBS VKCapture
     sudo apt clean
 }

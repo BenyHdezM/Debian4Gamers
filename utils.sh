@@ -34,7 +34,7 @@ installDependencies() {
     print_log "\n###############################################################
 ##                Installing Dependencies                    ##
 ###############################################################\n"
-    sudo apt install -y nala bpytop neofetch git mesa-opencl-icd bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv
+    sudo apt install -y nala bpytop neofetch git mesa-opencl-icd bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv zenity 
     sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator 
     # Packages for compiling CoreCtrl
     sudo apt install cmake extra-cmake-modules libquazip1-qt5-dev libspdlog-dev qttools5-dev qtdeclarative5-dev libqt5charts5-dev libqt5svg5-dev libbotan-2-dev libqca-qt5-2-dev libdrm-dev qtbase5-dev libegl1-mesa-dev libegl-dev libquazip5-dev libpolkit-gobject-1-dev libdbus-1-dev -y
