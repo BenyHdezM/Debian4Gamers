@@ -43,4 +43,6 @@ installDependencies() {
     sudo apt clean
     sudo apt autoremove
     vaapiOnFirefox
+    #Enabling user-theme Extensions
+    gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 }
