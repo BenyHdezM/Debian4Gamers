@@ -143,14 +143,14 @@ else
   echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
 
-#TODO: Add AMD Firmware:
+###### TODO IDEAS #######: 
+#Add AMD Firmware:
 # https://askubuntu.com/questions/1124253/missing-firmware-for-amdgpu
 
-#TODO: Disable Gnome-Clasic-Xorg
+# Set Gnome shell X11 as Default
+# Edit splash for Grub
 
-#TODO: Edit splash for Grub
-
-#TOD0: Davinci_Resolve for Debian
+# Davinci_Resolve for Debian
 # wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.4/DaVinci_Resolve_18.6.4_Linux.zip?verify=1706867615-BJMMD0Y7fn%2F1TNfWvyHkxQY%2BsTx6m0q7g%2BBcsnumqNw%3D
 # sudo apt install fakeroot xorriso
 
@@ -160,5 +160,5 @@ fi
 #sudo apt-get update
 #sudo apt-get install proton-vpn-gnome-desktop
 
-#TODO FOR LAPTOPS:
+#FOR LAPTOPS:
 #install fingerprint
