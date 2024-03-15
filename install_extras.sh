@@ -43,7 +43,6 @@ installCoreCtrl() {
         num_jobs=$((num_processors - 2))
         make -j$num_jobs #Run make with the set number of jobs
         sudo make install
-        sudo rm -r /tmp/corectrl
         enablelFullAmdGpuControl
     fi
 }
