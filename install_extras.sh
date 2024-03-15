@@ -64,6 +64,21 @@ installLiquidCtl() {
     fi
 }
 
+installAutoCpuFreq() {
+    ###############################################################################
+    #                            Install Auto-CpuFreq                             #
+    ###############################################################################
+    if whiptail --title "Auto-CpuFreq" --yesno "Do you want to Install Auto-CpuFreq?" 8 78; then
+        print_log "\n###############################################################
+##                     Installing Auto-CpuFreq                  ##
+###############################################################\n"
+        cd /tmp
+        git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+        cd auto-cpufreq && sudo ./auto-cpufreq-installer --install
+        sudo auto-cpufreq --install
+    fi
+}
+
 installDisplayLink() {
     ###############################################################################
     #                             Install DisplayLink                             #

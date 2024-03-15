@@ -64,9 +64,10 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "4" "Install WhiteSur and Gnome Configs ( Recommended )" ON \
   "5" "Install CoreCtrl ( OC ) " ON \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
-  "7" "Install DisplayLink Driver ( Extra ) " OFF \
-  "8" "Install Visual Studio Code ( Extra ) " OFF \
-  "9" "Install GPU Latest Drivers ( EXperimental ) " OFF 3>&1 1>&2 2>&3)
+  "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
+  "8" "Install DisplayLink Driver ( Extra ) " OFF \
+  "9" "Install Visual Studio Code ( Extra ) " OFF \
+  "10" "Install GPU Latest Drivers ( EXperimental ) " OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -107,14 +108,19 @@ else
     "7")
       sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
       source /tmp/install_extras.sh
-      installDisplayLink
+      installAutoCpuFreq
       ;;
     "8")
       sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
       source /tmp/install_extras.sh
-      installVSCode
+      installDisplayLink
       ;;
     "9")
+      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
+      source /tmp/install_extras.sh
+      installVSCode
+      ;;
+    "10")
       sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
       source /tmp/install_drivers.sh
       installGpuDrivers
