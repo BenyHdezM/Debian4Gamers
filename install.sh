@@ -8,6 +8,16 @@
 #                           DECLARED VARIABLES                                #
 ###############################################################################
 
+importSource() {
+  archivo="$1"
+  if [ -f "$archivo" ]; then
+    source "$archivo"
+  else
+    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/$archivo -O /tmp/$archivo
+    source /tmp/$archivo
+  fi
+}
+
 print_log() {
   echo -e "\033[1;33m$1\033[0m"
 }
@@ -50,9 +60,8 @@ print_log "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
-sudo rm -r /tmp/*
-sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/utils.sh -O /tmp/utils.sh
-source /tmp/utils.sh
+sudo rm -rf /tmp/*
+importSource "utils.sh"
 upgradeSystem
 installDependencies
 
@@ -76,53 +85,43 @@ else
     echo $InstallOptions
     case "$Option" in
     "1")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
-      source /tmp/install_drivers.sh
+      importSource "install_drivers.sh"
       installSteamAndTools
       ;;
     "2")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extensions.sh -O /tmp/install_extensions.sh
-      source /tmp/install_extensions.sh
+      importSource "install_extensions.sh"
       installExtensions
       ;;
     "3")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_flatpak.sh -O /tmp/install_flatpak.sh
-      source /tmp/install_flatpak.sh
+      importSource "install_flatpak.sh"
       installFlatpak
       ;;
     "4")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_gnome_theme.sh -O /tmp/install_gnome_theme.sh
-      source /tmp/install_gnome_theme.sh
+      importSource "install_gnome_theme.sh"
       installGnomeTheme
       ;;
     "5")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
-      source /tmp/install_extras.sh
+      importSource "install_extras.sh"
       installCoreCtrl
       ;;
     "6")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
-      source /tmp/install_extras.sh
+      importSource "install_extras.sh"
       installLiquidCtl
       ;;
     "7")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
-      source /tmp/install_extras.sh
+      importSource "install_extras.sh"
       installAutoCpuFreq
       ;;
     "8")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
-      source /tmp/install_extras.sh
+      importSource "install_extras.sh"
       installDisplayLink
       ;;
     "9")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_extras.sh -O /tmp/install_extras.sh
-      source /tmp/install_extras.sh
+      importSource "install_extras.sh"
       installVSCode
       ;;
     "10")
-      sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/install_drivers.sh -O /tmp/install_drivers.sh
-      source /tmp/install_drivers.sh
+      importSource "install_drivers.sh"
       installGpuDrivers
       ;;
     *)
@@ -162,5 +161,4 @@ fi
 #sudo apt-get install proton-vpn-gnome-desktop
 
 #TODO FOR LAPTOPS:
-#Install auto-cpufreq
 #install fingerprint
