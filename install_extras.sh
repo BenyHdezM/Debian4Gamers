@@ -33,7 +33,7 @@ installCoreCtrl() {
         # Download and build
         cd
         git clone https://gitlab.com/corectrl/corectrl.git
-        cd /tmp/corectrl
+        cd corectrl
         git checkout 1.3-stable
         mkdir build
         cd build
