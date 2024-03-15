@@ -31,6 +31,7 @@ installCoreCtrl() {
 
         whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
         # Download and build
+        source ~/.bashrc
         cd
         git clone https://gitlab.com/corectrl/corectrl.git
         cd corectrl
