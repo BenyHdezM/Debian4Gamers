@@ -58,12 +58,9 @@ installGnomeTheme() {
         print_log "\n###############################################################
 ##    Setting up Keybindings for Terminal and Show-Desktop   ##
 ###############################################################\n"
-        sudo apt purge gnome-terminal -y
-        sudo apt autoremove -y
-        sudo apt install kgx -y
         gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
         gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
-        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "$kgx"
+        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
         gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Ctrl><Alt>t"
         gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
     fi
