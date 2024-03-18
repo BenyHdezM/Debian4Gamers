@@ -27,6 +27,7 @@ installMesaDrivers() {
     sudo apt update
     sudo apt install mesa-vulkan-drivers
     rollBackSource
+    installBackportKernel
 }
 
 installSteamAndTools() {
@@ -56,6 +57,10 @@ rollBackSource() {
     sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
     sudo apt update
     sudo apt autoremove -y
+}
+
+installBackportKernel(){
+    sudo apt -t stable-backports install linux-image-amd64 -y
 }
 
 installGpuDrivers() {
