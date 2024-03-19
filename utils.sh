@@ -46,3 +46,15 @@ installDependencies() {
     #Enabling user-theme Extensions
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 }
+
+enablePlaymouth() {
+    # Path to GRUB configuration file
+    GRUB_CONFIG_FILE="/etc/default/grub"
+
+    # New line to be inserted
+    NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+
+    # Replace line in GRUB configuration file
+    sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
+    sudo update-grub
+}

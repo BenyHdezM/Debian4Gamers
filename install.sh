@@ -64,6 +64,7 @@ sudo rm -rf /tmp/*
 importSource "utils.sh"
 upgradeSystem
 installDependencies
+enablePlaymouth
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 15 70 10 \
