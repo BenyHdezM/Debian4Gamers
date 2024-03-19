@@ -39,11 +39,11 @@ installSteamAndTools() {
 }
 
 switchToTestingSource() {
-    sudo echo -e "deb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
+    sudo echo -e "\ndeb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
 }
 
 switchToSidSource() {
-    sudo echo -e "deb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
+    sudo echo -e "\ndeb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
 }
 
 rollBackSource() {
