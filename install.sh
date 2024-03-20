@@ -72,7 +72,7 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install Flatpak and Set Flathub Store ( Recommended ) " ON \
   "4" "Install WhiteSur and Gnome Configs ( Recommended )" ON \
-  "5" "Install CoreCtrl ( OC ) " ON \
+  "5" "Install CoreCtrl ( OC ) " OFF \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
   "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
