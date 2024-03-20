@@ -47,6 +47,10 @@ installGnomeTheme() {
         gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
         gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
 
+        wget https://raw.githubusercontent.com/BenyHdezM/Debian4Gamers/main/images/sierra.jpg -O $HOME/sierra.jpg
+        ruta_imagen="$HOME/sierra.jpg"
+        gsettings set org.gnome.desktop.background picture-uri "file://${ruta_imagen}"
+
     fi
 
     #Adding Keybinding for
@@ -84,5 +88,5 @@ installGnomeTheme() {
 ###############################################################\n"
         wget -O- https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh | bash
     fi
-    
+
 }
