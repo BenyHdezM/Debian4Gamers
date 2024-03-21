@@ -25,7 +25,7 @@ installMesaDrivers() {
     sudo apt clean
     switchToTestingSource
     sudo apt update
-    sudo apt install mesa-vulkan-drivers -y
+    sudo apt install mesa-vulkan-drivers libva-glx2 -y
     rollBackSource
     installBackportKernel
 }
