@@ -61,6 +61,7 @@ rollBackSource() {
 
 installBackportKernel(){
     sudo apt -t stable-backports install linux-image-amd64 -y
+    sudo apt -t stable-backports dist-upgrade
 }
 
 installGpuDrivers() {
