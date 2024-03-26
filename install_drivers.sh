@@ -27,7 +27,10 @@ installMesaDrivers() {
     sudo apt update
     sudo apt install mesa-vulkan-drivers libva-glx2 vainfo -y
     rollBackSource
-    installBackportKernel
+    cd /tmp
+    git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    sudo cp /tmp/linux-firmware/amdgpu/* /lib/firmware/amdgpu 
+    sudo update-initramfs -k all -u 
 }
 
 installSteamAndTools() {
@@ -92,4 +95,5 @@ installGpuDrivers() {
             ;;
         esac
     fi
+    installBackportKernel
 }
