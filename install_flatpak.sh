@@ -28,7 +28,8 @@ installFlatpak() {
         "5" "Install GPU Screen Recorder" OFF \
         "6" "Install Helvum" OFF \
         "7" "Install Heroic Launcher" OFF \
-        "8" "Install Telegram" OFF 3>&1 1>&2 2>&3)
+        "8" "Install Telegram" OFF \
+        "9" "Install Proton VPN" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -60,6 +61,14 @@ installFlatpak() {
                 ;;
             "8")
                 sudo flatpak install -y flathub org.telegram.desktop
+                ;;
+            "9")
+                cd /tmp
+                wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
+                sudo dpkg -i ./protonvpn-stable-release_1.0.3-2_all.deb && sudo apt update
+                sudo apt update && sudo apt upgrade
+                sudo apt install proton-vpn-gnome-desktop
+                sudo apt install libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1
                 ;;
             *)
                 echo "Unsupported item $Options!" >&2
