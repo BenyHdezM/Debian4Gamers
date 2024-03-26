@@ -145,8 +145,6 @@ else
 fi
 
 ###### TODO IDEAS #######: 
-#Add AMD Firmware:
-# https://askubuntu.com/questions/1124253/missing-firmware-for-amdgpu
 
 # Set Gnome shell X11 as Default
 # Edit splash for Grub
