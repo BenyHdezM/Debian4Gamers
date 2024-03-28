@@ -155,3 +155,17 @@ fi
 
 #FOR LAPTOPS:
 #install fingerprint
+
+
+#TODO INSTALL VKCAPTURE OBS-GSTREAMER 
+# https://github.com/fzwoch/obs-gstreamer
+# https://github.com/nowrep/obs-vkcapture
+# https://github.com/occ-ai/obs-backgroundremoval
+# sudo apt install gstreamer1.0-vaapi gstreamer1.0-plugins-* gstreamer1.0-tools
+
+# sudo flatpak install -y com.obsproject.Studio
+# sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/23.08
+# sudo flatpak install -y com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable
+# sudo flatpak install -y com.obsproject.Studio.Plugin.BackgroundRemoval
+# sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08
+# sudo flatpak install -y com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable
