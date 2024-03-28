@@ -26,10 +26,11 @@ installFlatpak() {
         "3" "Install Spotify" OFF \
         "4" "Install Bottles" OFF \
         "5" "Install GPU Screen Recorder" OFF \
-        "6" "Install Helvum" OFF \
-        "7" "Install Heroic Launcher" OFF \
-        "8" "Install Telegram" OFF \
-        "9" "Install Proton VPN" OFF 3>&1 1>&2 2>&3)
+        "6" "Install OBS-Studio" OFF \
+        "7" "Install Helvum" OFF \
+        "8" "Install Heroic Launcher" OFF \
+        "9" "Install Telegram" OFF \
+        "10" "Install Proton VPN" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -54,15 +55,24 @@ installFlatpak() {
                 sudo flatpak install -y flathub com.dec05eba.gpu_screen_recorder
                 ;;
             "6")
-                sudo flatpak install -y flathub org.pipewire.Helvum
+                installVKCapture
+                sudo flatpak install -y com.obsproject.Studio
+                sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/23.08
+                sudo flatpak install -y com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable
+                sudo flatpak install -y com.obsproject.Studio.Plugin.BackgroundRemoval
+                sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08
+                sudo flatpak install -y com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable
                 ;;
             "7")
-                sudo flatpak install -y flathub com.heroicgameslauncher.hgl
+                sudo flatpak install -y flathub org.pipewire.Helvum
                 ;;
             "8")
-                sudo flatpak install -y flathub org.telegram.desktop
+                sudo flatpak install -y flathub com.heroicgameslauncher.hgl
                 ;;
             "9")
+                sudo flatpak install -y flathub org.telegram.desktop
+                ;;
+            "10")
                 cd /tmp
                 wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
                 sudo dpkg -i ./protonvpn-stable-release_1.0.3-2_all.deb && sudo apt update
@@ -77,4 +87,17 @@ installFlatpak() {
             esac
         done
     fi
+}
+
+installVKCapture() {
+    sudo apt install -y cmake libobs-dev libvulkan-dev libgl-dev libegl-dev libx11-dev libxcb1-dev libwayland-client0 wayland-scanner++
+    cd /tmp
+    git clone https://github.com/nowrep/obs-vkcapture.git
+    cd /tmp/obs-vkcapture
+    mkdir build && cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    make && sudo make install
+    print_log "1. Add Game Capture to your OBS scene."
+    print_log "2. Start the game with capture enabled obs-gamecapture %command%."
+    print_log "3. (Recommended) Start the game with only Vulkan capture enabled env OBS_VKCAPTURE=1 %command%."
 }
