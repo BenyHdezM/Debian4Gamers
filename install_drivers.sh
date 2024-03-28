@@ -36,7 +36,7 @@ installMesaDrivers() {
 installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
-    sudo apt install -y mangohud steam-installer gamescope gamescope mpv
+    sudo apt install -y mangohud steam-installer gamescope mpv
     # TODO: OBS VKCapture
     sudo apt clean
 }
