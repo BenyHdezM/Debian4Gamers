@@ -23,14 +23,17 @@ installMesaDrivers() {
 ##                 Installing MESA VULKAN DRIVERS            ##
 ###############################################################\n"
     sudo apt clean
-    switchToTestingSource
+    addMesaSource
     sudo apt update
-    sudo apt install mesa-vulkan-drivers libva-glx2 vainfo -y
+    sudo apt install mesa-vulkan-drivers mesa-va-drivers mesa-vdpau-drivers -y
+    switchToSidSource
+    sudo apt update
+    sudo apt install gamescope -y
     rollBackSource
     cd /tmp
     git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-    sudo cp /tmp/linux-firmware/amdgpu/* /lib/firmware/amdgpu 
-    sudo update-initramfs -k all -u 
+    sudo cp /tmp/linux-firmware/amdgpu/* /lib/firmware/amdgpu
+    sudo update-initramfs -k all -u
 }
 
 installSteamAndTools() {
@@ -42,11 +45,13 @@ installSteamAndTools() {
 }
 
 switchToTestingSource() {
-    sudo echo -e "\ndeb http://deb.debian.org/debian testing main" | sudo tee -a /etc/apt/sources.list
+    sudo rm /etc/apt/sources.list
+    sudo echo -e "\ndeb http://deb.debian.org/debian testing main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
 }
 
 switchToSidSource() {
-    sudo echo -e "\ndeb http://deb.debian.org/debian sid main" | sudo tee -a /etc/apt/sources.list
+    sudo rm /etc/apt/sources.list
+    sudo echo -e "\ndeb http://deb.debian.org/debian sid main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
 }
 
 rollBackSource() {
@@ -62,9 +67,9 @@ rollBackSource() {
     sudo apt autoremove -y
 }
 
-installBackportKernel(){
+installBackportKernel() {
     sudo apt -t stable-backports install linux-image-amd64 -y
-    sudo apt -t stable-backports dist-upgrade
+    sudo apt -t stable-backports dist-upgrade -y
 }
 
 installGpuDrivers() {

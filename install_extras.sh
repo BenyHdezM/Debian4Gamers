@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-enablelFullAmdGpuControl() {
+enableFullAmdGpuControl() {
     gpu_info=$(lspci | grep -i vga)
     # Check GPU manufacturer
     if [[ "$gpu_info" == *AMD* || "$gpu_info" == *amd* ]]; then
@@ -22,29 +22,16 @@ enablelFullAmdGpuControl() {
 
 installCoreCtrl() {
     ###############################################################################
-    #                         Compile and Install CoreCtrl                        #
+    #              Adding CoreCtrl source and Install CoreCtrl                    #
     ###############################################################################
-    if whiptail --title "CoreCtrl" --yesno "Are you insterested on Compile and Install CoreCtrl?" 8 78; then
+    if whiptail --title "CoreCtrl" --yesno "Are you insterested on Install CoreCtrl?" 8 78; then
         print_log "\n###############################################################
-##               Compile and Install CoreCtrl                ##
+##      Adding CoreCtrl source and Install CoreCtrl          ##
 ###############################################################\n"
-        sudo apt-get update && sudo apt-get install build-essential
-        whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
-        # Download and build
-        source ~/.bashrc
-        cd
-        git clone https://gitlab.com/corectrl/corectrl.git
-        cd corectrl
-        git checkout 1.3-stable
-        mkdir build
-        cd build
-        cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
-        # Get the number of processors and subtract two
-        num_processors=$(grep -c ^processor /proc/cpuinfo)
-        num_jobs=$((num_processors - 2))
-        make -j$num_jobs #Run make with the set number of jobs
-        sudo make install
-        enablelFullAmdGpuControl
+        addMesaSource
+        sudo apt-get update
+        sudo apt install corectrl -y
+        enableFullAmdGpuControl
     fi
 }
 
