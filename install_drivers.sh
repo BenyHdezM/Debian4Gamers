@@ -25,7 +25,7 @@ installMesaDrivers() {
     sudo apt clean
     addMesaSource
     sudo apt update
-    sudo apt install mesa-vulkan-drivers mesa-va-drivers mesa-vdpau-drivers -y
+    sudo apt install mesa-vulkan-drivers -y
     switchToSidSource
     sudo apt update
     sudo apt install gamescope -y
