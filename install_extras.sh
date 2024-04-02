@@ -28,7 +28,7 @@ installCoreCtrl() {
         print_log "\n###############################################################
 ##               Compile and Install CoreCtrl                ##
 ###############################################################\n"
-
+        sudo apt-get update && sudo apt-get install build-essential
         whiptail --title " **⚠️  WARNING ⚠️**  " --msgbox "Please don't touch anything until the process is completed, compile process will use all your CPU." 8 78
         # Download and build
         source ~/.bashrc

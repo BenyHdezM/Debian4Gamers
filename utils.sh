@@ -5,7 +5,12 @@ upgradeSystem() {
     #                   Updating all the system                                   #
     ###############################################################################
     sudo rm /etc/apt/sources.list
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
+
+    if [ -f "stable_sources.list" ]; then
+        sudo cp stable_sources.list /etc/apt/sources.list
+    else
+        sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
+    fi
 
     print_log "\n###############################################################
 ##    Upgrading the entire system preparation...             ##
