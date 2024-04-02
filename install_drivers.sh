@@ -44,29 +44,6 @@ installSteamAndTools() {
     sudo apt clean
 }
 
-switchToTestingSource() {
-    sudo rm /etc/apt/sources.list
-    sudo echo -e "\ndeb http://deb.debian.org/debian testing main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
-}
-
-switchToSidSource() {
-    sudo rm /etc/apt/sources.list
-    sudo echo -e "\ndeb http://deb.debian.org/debian sid main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
-}
-
-rollBackSource() {
-    ###############################################################################
-    #                   Rollback - remove Testing branch                          #
-    ###############################################################################
-    print_log "\n###############################################################
-##         Rollingback -> removing Testing branch            ##
-###############################################################\n"
-    sudo rm /etc/apt/sources.list
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
-    sudo apt update
-    sudo apt autoremove -y
-}
-
 installBackportKernel() {
     sudo apt -t stable-backports install linux-image-amd64 -y
     sudo apt -t stable-backports dist-upgrade -y

@@ -32,6 +32,7 @@ installCoreCtrl() {
         sudo apt-get update
         sudo apt install corectrl -y
         enableFullAmdGpuControl
+        rollBackSource
     fi
 }
 
