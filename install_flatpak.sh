@@ -50,6 +50,7 @@ installFlatpak() {
                 ;;
             "4")
                 sudo flatpak install -y flathub com.usebottles.bottles
+                installFreedesktopVulkanLayers
                 ;;
             "5")
                 sudo flatpak install -y flathub com.dec05eba.gpu_screen_recorder
@@ -68,6 +69,7 @@ installFlatpak() {
                 ;;
             "8")
                 sudo flatpak install -y flathub com.heroicgameslauncher.hgl
+                installFreedesktopVulkanLayers
                 ;;
             "9")
                 sudo flatpak install -y flathub org.telegram.desktop
@@ -100,4 +102,9 @@ installVKCapture() {
     print_log "1. Add Game Capture to your OBS scene."
     print_log "2. Start the game with capture enabled obs-gamecapture %command%."
     print_log "3. (Recommended) Start the game with only Vulkan capture enabled env OBS_VKCAPTURE=1 %command%."
+}
+
+installFreedesktopVulkanLayers(){
+    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
+    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08
 }
