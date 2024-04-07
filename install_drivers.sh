@@ -28,7 +28,7 @@ installMesaDrivers() {
     sudo apt install mesa-vulkan-drivers -y
     switchToSidSource
     sudo apt update
-    sudo apt install gamescope -y
+    sudo apt install -y
     rollBackSource
     cd /tmp
     git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware.git
@@ -39,7 +39,7 @@ installMesaDrivers() {
 installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
-    sudo apt install -y mangohud steam-installer gamescope mpv
+    sudo apt install -y mangohud steam-installer gamescope gamemode mangohud mpv
     # TODO: OBS VKCapture
     sudo apt clean
 }
