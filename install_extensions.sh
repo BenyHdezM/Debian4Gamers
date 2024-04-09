@@ -18,8 +18,9 @@ Your quick action is needed for a smooth setup. Thank you!" 8 78
         "2" "Install TrayIconsReloaded" ON \
         "3" "Install Dash-To-Dock" ON \
         "4" "Install No-Overview" ON \
-        "5" "Install Vitals" OFF \
-        "6" "Install Battery Health Charging ( Optional for Laptops )" OFF 3>&1 1>&2 2>&3)
+        "5" "Install Vitals" ON \
+        "6" "Install Audio-Devices-Hider" ON \
+        "7" "Install Battery Health Charging ( Optional for Laptops )" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -58,6 +59,10 @@ Your quick action is needed for a smooth setup. Thank you!" 8 78
                 gnome-extensions enable Vitals@CoreCoding.com
                 ;;
             "6")
+                busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "quicksettings-audio-devices-hider@marcinjahn.com"
+                gnome-extensions enable quicksettings-audio-devices-hider@marcinjahn.com
+                ;;
+            "7")
                 # cd /tmp
                 # wget -O BatteryHealthCharging.zip https://extensions.gnome.org/extension-data/Battery-Health-Chargingmaniacx.github.com.v59.shell-extension.zip
                 # gnome-extensions install --force BatteryHealthCharging.zip
