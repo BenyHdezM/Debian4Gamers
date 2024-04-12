@@ -64,7 +64,7 @@ addMesaSource(){
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 177961E789BE960FE5E59170B78C97EF9B2235DD
     sudo rm /etc/apt/trusted.gpg.d/slack.gpg
     sudo apt-key export 9B2235DD | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/slack.gpg
-    sudo echo -e "\ndeb [arch=amd64] https://ppa.launchpadcontent.net/ernstp/mesarc/ubuntu jammy main" | sudo tee -a /etc/apt/sources.list
+    sudo echo -e "\ndeb [arch=amd64] https://ppa.launchpadcontent.net/ernstp/mesarc/ubuntu focal main" | sudo tee -a /etc/apt/sources.list
 }
 
 switchToTestingSource() {

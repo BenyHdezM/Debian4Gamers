@@ -34,6 +34,9 @@ installMesaDrivers() {
     git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware.git
     sudo cp /tmp/linux-firmware/amdgpu/* /lib/firmware/amdgpu
     sudo update-initramfs -k all -u
+    # Rollback VA Drivers except Vulkan
+    sudo apt purge -y mesa-vdpau-drivers mesa-va-drivers mesa-opencl-icd libxatracker2
+    sudo apt install -y mesa-vdpau-drivers mesa-va-drivers mesa-opencl-icd libxatracker2
 }
 
 installSteamAndTools() {
