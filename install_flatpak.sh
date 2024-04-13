@@ -78,7 +78,7 @@ installFlatpak() {
                 cd /tmp
                 wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
                 sudo dpkg -i ./protonvpn-stable-release_1.0.3-2_all.deb && sudo apt update
-                sudo apt update && sudo apt upgrade
+                sudo apt update && sudo apt upgrade -y
                 sudo apt install -y proton-vpn-gnome-desktop
                 sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1
                 ;;

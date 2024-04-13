@@ -39,7 +39,7 @@ installDependencies() {
     print_log "\n###############################################################
 ##                Installing Dependencies                    ##
 ###############################################################\n"
-    sudo apt install -y nala bpytop neofetch git mesa-opencl-icd bash-completion vulkan-tools firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv zenity
+    sudo apt install -y nala bpytop neofetch git mesa-opencl-icd bash-completion vulkan-tools vainfo firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv zenity
     sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
     sudo apt clean
     sudo apt autoremove
