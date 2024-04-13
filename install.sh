@@ -64,20 +64,27 @@ sudo rm -rf /tmp/*
 importSource "utils.sh"
 upgradeSystem
 installDependencies
-enablePlaymouth
+# enablePlaymouth
+
+importSource "install_drivers.sh"
+importSource "install_extensions.sh"
+importSource "install_flatpak.sh"
+importSource "install_gnome_theme.sh"
+importSource "install_extras.sh"
+importSource "install_drivers.sh"
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 15 70 10 \
-  "1" "Install Steam, MangoHud and Tools ( Highly Recommended )" ON \
+  "1" "Install Steam, Flatpak and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
-  "3" "Install Flatpak and Set Flathub Store ( Recommended ) " ON \
+  "3" "Install FlatHubApps ( Recommended ) " ON \
   "4" "Install WhiteSur and Gnome Configs ( Recommended )" ON \
   "5" "Install CoreCtrl ( OC ) " OFF \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
   "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
   "9" "Install Visual Studio Code ( Extra ) " OFF \
-  "10" "Install GPU Latest Drivers ( Experimental ) " OFF 3>&1 1>&2 2>&3)
+  "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -86,43 +93,34 @@ else
     echo $InstallOptions
     case "$Option" in
     "1")
-      importSource "install_drivers.sh"
+
       installSteamAndTools
       ;;
     "2")
-      importSource "install_extensions.sh"
       installExtensions
       ;;
     "3")
-      importSource "install_flatpak.sh"
-      installFlatpak
+      installFlatpakApps
       ;;
     "4")
-      importSource "install_gnome_theme.sh"
       installGnomeTheme
       ;;
     "5")
-      importSource "install_extras.sh"
       installCoreCtrl
       ;;
     "6")
-      importSource "install_extras.sh"
       installLiquidCtl
       ;;
     "7")
-      importSource "install_extras.sh"
       installAutoCpuFreq
       ;;
     "8")
-      importSource "install_extras.sh"
       installDisplayLink
       ;;
     "9")
-      importSource "install_extras.sh"
       installVSCode
       ;;
     "10")
-      importSource "install_drivers.sh"
       installGpuDrivers
       ;;
     *)
@@ -144,7 +142,7 @@ else
   echo -e "\nEnsure to reboot your system soon to apply the changes"
 fi
 
-###### TODO IDEAS #######: 
+###### TODO IDEAS #######:
 
 # Set Gnome shell X11 as Default
 # Edit splash for Grub
@@ -155,3 +153,6 @@ fi
 
 #FOR LAPTOPS:
 #install fingerprint
+
+# Mangohud Config:
+# ln -s ~/.config/MangoHud/MangoHud.conf ~/.var/app/com.valvesoftware.Steam/config/MangoHud/

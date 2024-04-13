@@ -1,24 +1,6 @@
 #! /usr/bin/env bash
 
-installFlatpak() {
-    ###############################################################################
-    #                   Installing Flatpak and Flathub Store                      #
-    ###############################################################################
-    print_log "\n###############################################################
-##           Installing Flatpak and Flathub Store            ##
-###############################################################\n"
-
-    #TODO: whiptail Selector for all flatpaks
-    sudo apt install -y flatpak gnome-software-plugin-flatpak
-    sudo apt clean
-    ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
-    sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-    #Install Discord, Spotify and ProtonUp-Qt
-    print_log "\n###############################################################
-##         Installing Discord, Spotify and ProtonUp-Qt       ##
-###############################################################\n"
-
+installFlatpakApps() {
     InstallOptions=$(whiptail --separate-output --title "Flatpak Apps Options" --checklist \
         "Choose Flatpak Apps to Install" 20 78 10 \
         "1" "Install Discord" ON \
@@ -104,7 +86,7 @@ installVKCapture() {
     print_log "3. (Recommended) Start the game with only Vulkan capture enabled env OBS_VKCAPTURE=1 %command%."
 }
 
-installFreedesktopVulkanLayers(){
+installFreedesktopVulkanLayers() {
     sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
     sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08
 }

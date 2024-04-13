@@ -25,30 +25,24 @@ installMesaDrivers() {
     sudo apt clean
     addMesaSource
     sudo apt update
+    sudo apt dist-upgrade -y
     sudo apt install mesa-vulkan-drivers -y
-    switchToSidSource
-    sudo apt update
-    sudo apt install -y
     rollBackSource
-    cd /tmp
-    git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-    sudo cp /tmp/linux-firmware/amdgpu/* /lib/firmware/amdgpu
-    sudo update-initramfs -k all -u
-    # Rollback VA Drivers except Vulkan
-    sudo apt purge -y mesa-vdpau-drivers mesa-va-drivers mesa-opencl-icd libxatracker2
-    sudo apt install -y mesa-vdpau-drivers mesa-va-drivers mesa-opencl-icd libxatracker2
 }
 
 installSteamAndTools() {
     upgradeSystem
-    print_log "\n#################### Installing firmwares, tools and Steam ####################\n"
-    sudo apt install -y mangohud steam-installer gamescope gamemode mangohud mpv
-    # TODO: OBS VKCapture
+    print_log "\n#################### Installing tools and Steam ####################\n"
+    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud mpv
+    # Steam Replaced for Flathub Steam. 
+    sudo apt install -y goverlay mpv
+    installFlatpak
+    flatpak install -y flathub com.valvesoftware.Steam
+    installFreedesktopVulkanLayers
     sudo apt clean
 }
 
 installBackportKernel() {
-    sudo apt -t stable-backports install linux-image-amd64 -y
     sudo apt -t stable-backports dist-upgrade -y
 }
 

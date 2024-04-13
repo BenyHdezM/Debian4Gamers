@@ -16,7 +16,7 @@ upgradeSystem() {
 ##    Upgrading the entire system preparation...             ##
 ###############################################################\n"
     sudo apt update
-    sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
+    # sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
     sudo apt dist-upgrade -y
     sudo apt autoremove -y
 }
@@ -88,4 +88,24 @@ rollBackSource() {
     sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
     sudo apt update
     sudo apt autoremove -y
+}
+
+installFlatpak() {
+    ###############################################################################
+    #                   Installing Flatpak and Flathub Store                      #
+    ###############################################################################
+    print_log "\n###############################################################
+##           Installing Flatpak and Flathub Store            ##
+###############################################################\n"
+
+    #TODO: whiptail Selector for all flatpaks
+    sudo apt install -y flatpak gnome-software-plugin-flatpak
+    sudo apt clean
+    ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
+    sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    #Install Discord, Spotify and ProtonUp-Qt
+    print_log "\n###############################################################
+##         Installing Discord, Spotify and ProtonUp-Qt       ##
+###############################################################\n"
 }
