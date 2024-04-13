@@ -92,7 +92,7 @@ installFlatpak() {
 }
 
 installVKCapture() {
-    sudo apt install -y cmake libobs-dev libvulkan-dev libgl-dev libegl-dev libx11-dev libxcb1-dev libwayland-client0 wayland-scanner++
+    sudo apt install -y pkg-config cmake libobs-dev libvulkan-dev libgl-dev libegl-dev libx11-dev libxcb1-dev libwayland-client0 wayland-scanner++
     cd /tmp
     git clone https://github.com/nowrep/obs-vkcapture.git
     cd /tmp/obs-vkcapture
