@@ -7,7 +7,6 @@
 ###############################################################################
 #                           DECLARED VARIABLES                                #
 ###############################################################################
-
 importSource() {
   archivo="$1"
   if [ -f "$archivo" ]; then
@@ -22,7 +21,14 @@ print_log() {
   echo -e "\033[1;33m$1\033[0m"
 }
 
-###############################################################################
+importSource "utils.sh"
+importSource "install_drivers.sh"
+importSource "install_extensions.sh"
+importSource "install_flatpak.sh"
+importSource "install_gnome_theme.sh"
+importSource "install_extras.sh"
+importSource "install_drivers.sh"
+
 if [[ -w "/root" ]]; then
   print_log "Do not run the script with root"
   exit
@@ -30,6 +36,9 @@ if [[ -w "/root" ]]; then
 else
   USER_NAME=$(whoami)
 fi
+
+###############################################################################
+
 print_log "###############################################################
 ##                                                           ##
 ##                Script to Config Debian 12                 ##
@@ -60,21 +69,14 @@ print_log "\n###############################################################
     !!Hey $USER_NAME Insert now your USER password         
     ( you are a sudoer now )!!                             
 ###############################################################\n"
+
 sudo rm -rf /tmp/*
-importSource "utils.sh"
 upgradeSystem
 installDependencies
-# enablePlaymouth
-
-importSource "install_drivers.sh"
-importSource "install_extensions.sh"
-importSource "install_flatpak.sh"
-importSource "install_gnome_theme.sh"
-importSource "install_extras.sh"
-importSource "install_drivers.sh"
+enablePlaymouth
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
-  "Choose Installation Options" 15 70 10 \
+  "Choose Installation Options" 20 70 12 \
   "1" "Install Steam, Flatpak and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install FlatHubApps ( Recommended ) " ON \

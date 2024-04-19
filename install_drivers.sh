@@ -1,7 +1,8 @@
 #! /usr/bin/env bash
 
 installNvidiaDrivers() {
-    # Installing the appropriate GPU drivers
+    print_log "Installing the appropriate GPU drivers..."
+    sudo apt install nvidia-driver firmware-misc-nonfree
     sudo nala install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
     # For h.264 and h.265 export you also need the NVIDIA encode library:
     sudo nala install libnvidia-encode1
@@ -19,9 +20,7 @@ installMesaDrivers() {
     ###############################################################################
     #               Upgrading MESA VULKAN DRIVERS from Testing branch             #
     ###############################################################################
-    print_log "\n###############################################################
-##                 Installing MESA VULKAN DRIVERS            ##
-###############################################################\n"
+    print_log "**⚠️ Installing latest Mesa Vulkan Drivers ⚠️**"
     sudo apt clean
     addMesaSource
     sudo apt update
@@ -33,22 +32,21 @@ installMesaDrivers() {
 installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing tools and Steam ####################\n"
-    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud mpv
-    # Steam Replaced for Flathub Steam. 
-    sudo apt install -y goverlay mpv
+    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud
+    # Steam Replaced for Flathub Steam.
     installFlatpak
     flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
     sudo apt clean
 }
 
-installBackportKernel() {
-    sudo apt -t stable-backports dist-upgrade -y
+installBackportUpgrades() {
+    sudo apt -t bookworm-backports install linux-image-amd64 linux-headers-amd64 -y
 }
 
 installGpuDrivers() {
-    if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the latest GPU drivers on your system? This will entail installing MESA from the testing branch or Nvidia-Drivers, depending on your GPU chipset.\
-    Please note that this feature is experimental, and while it could potentially enhance performance in many games, particularly those utilizing Ray Tracing, it may not be fully stable. Therefore, I don't recommend it for general use." 20 78; then
+    if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the Nvidia GPU drivers on your system? This will entail installing Nvidia-Drivers from the Stable Repository.\
+    Please note that this feature is experimental, I do not use or have an Nvidia GPU for test this feature, please notify me if something is wrong." 20 78; then
         print_log "\n###############################################################
 ##                     Installing Latest GPU Drivers                ##
 ###############################################################\n"
@@ -57,22 +55,18 @@ installGpuDrivers() {
         # Check GPU manufacturer
         case "$gpu_info" in
         *AMD* | *amd*)
-            print_log "**⚠️ An AMD graphics card was detected. ⚠️**"
-            installMesaDrivers
+            print_log "**⚠️ An AMD graphics card was detected. Noting to do... ⚠️**"
             ;;
         *NVIDIA* | *nvidia*)
             print_log "**⚠️ A NVIDIA graphics card was detected. ⚠️**"
             installNvidiaDrivers
             ;;
         *Intel* | *intel*)
-            print_log "**⚠️ An Intel GPU was detected. ⚠️**"
-            installMesaDrivers
+            print_log "**⚠️ An Intel GPU was detected. Noting to do... ⚠️**"
             ;;
         *)
-            print_log "**⚠️ Unknown or no dedicated GPU detected. Installing Mesa drivers. ⚠️**"
-            installMesaDrivers
+            print_log "**⚠️ Unknown or no dedicated GPU detected.  Noting to do... ⚠️**"
             ;;
         esac
     fi
-    installBackportKernel
 }

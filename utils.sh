@@ -39,7 +39,7 @@ installDependencies() {
     print_log "\n###############################################################
 ##                Installing Dependencies                    ##
 ###############################################################\n"
-    sudo apt install -y nala bpytop neofetch git mesa-opencl-icd bash-completion vulkan-tools vainfo firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv zenity
+    sudo apt install -y nala bpytop neofetch git mpv mesa-opencl-icd bash-completion vulkan-tools vainfo firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics pulseaudio-utils libnotify-bin libzstd-dev python3.11-venv zenity
     sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
     sudo apt clean
     sudo apt autoremove
@@ -61,10 +61,10 @@ enablePlaymouth() {
 }
 
 addMesaSource(){
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 177961E789BE960FE5E59170B78C97EF9B2235DD
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB8B81E14DA65431D7504EA8F63F0F2B90935439
     sudo rm /etc/apt/trusted.gpg.d/slack.gpg
-    sudo apt-key export 9B2235DD | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/slack.gpg
-    sudo echo -e "\ndeb [arch=amd64] https://ppa.launchpadcontent.net/ernstp/mesarc/ubuntu jammy main" | sudo tee -a /etc/apt/sources.list
+    sudo apt-key export 90935439 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/slack.gpg
+    sudo echo -e "\ndeb [arch=amd64] https://ppa.launchpadcontent.net/kisak/kisak-mesa/ubuntu jammy main " | sudo tee -a /etc/apt/sources.list
 }
 
 switchToTestingSource() {
