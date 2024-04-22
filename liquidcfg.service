@@ -4,7 +4,7 @@ Description=AIO startup service
 [Service]
 Type=oneshot
 ExecStart=liquidctl initialize all
-ExecStart=liquidctl set fan speed  40 50  45 60  50 70 55 90  60 100
+ExecStart=liquidctl set fan speed  30 30  45 100
 
 [Install]
 WantedBy=default.target
