@@ -6,6 +6,7 @@ installNvidiaDrivers() {
     sudo nala install nvidia-driver nvidia-opencl-icd libcuda1 libglu1-mesa
     # For h.264 and h.265 export you also need the NVIDIA encode library:
     sudo nala install libnvidia-encode1
+    sudo flatpak update
 }
 
 installAMDPRO() {
