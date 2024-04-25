@@ -30,17 +30,6 @@ installMesaDrivers() {
     rollBackSource
 }
 
-installSteamAndTools() {
-    upgradeSystem
-    print_log "\n#################### Installing tools and Steam ####################\n"
-    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud
-    # Steam Replaced for Flathub Steam.
-    installFlatpak
-    flatpak install -y flathub com.valvesoftware.Steam
-    installFreedesktopVulkanLayers
-    sudo apt clean
-}
-
 installBackportUpgrades() {
     sudo apt -t bookworm-backports install linux-image-amd64 linux-headers-amd64 -y
 }

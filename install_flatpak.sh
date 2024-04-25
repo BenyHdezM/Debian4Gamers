@@ -1,5 +1,15 @@
 #! /usr/bin/env bash
 
+installSteamAndTools() {
+    upgradeSystem
+    print_log "\n#################### Installing tools and Steam ####################\n"
+    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud
+    # Steam Replaced for Flathub Steam.
+    flatpak install -y flathub com.valvesoftware.Steam
+    installFreedesktopVulkanLayers
+    sudo apt clean
+}
+
 installFlatpakApps() {
     InstallOptions=$(whiptail --separate-output --title "Flatpak Apps Options" --checklist \
         "Choose Flatpak Apps to Install" 20 78 10 \

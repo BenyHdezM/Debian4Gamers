@@ -64,7 +64,6 @@ defaultGrubEnhanced() {
         sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
         sudo update-grub
 
-        
     else
         # New line to be inserted
         NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
@@ -119,9 +118,4 @@ installFlatpak() {
     sudo apt clean
     ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-    #Install Discord, Spotify and ProtonUp-Qt
-    print_log "\n###############################################################
-##         Installing Discord, Spotify and ProtonUp-Qt       ##
-###############################################################\n"
 }

@@ -73,7 +73,9 @@ print_log "\n###############################################################
 sudo rm -rf /tmp/*
 upgradeSystem
 installDependencies
+installFlatpak
 defaultGrubEnhanced
+
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 70 12 \
