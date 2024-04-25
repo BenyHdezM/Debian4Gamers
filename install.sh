@@ -73,7 +73,7 @@ print_log "\n###############################################################
 sudo rm -rf /tmp/*
 upgradeSystem
 installDependencies
-enablePlaymouth
+defaultGrubEnhanced
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 70 12 \

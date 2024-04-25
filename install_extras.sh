@@ -1,25 +1,5 @@
 #! /usr/bin/env bash
 
-enableFullAmdGpuControl() {
-    gpu_info=$(lspci | grep -i vga)
-    # Check GPU manufacturer
-    if [[ "$gpu_info" == *AMD* || "$gpu_info" == *amd* ]]; then
-        print_log "**⚠️ Enable Full AMD GPU controls - Grub Update⚠️**"
-
-        # Path to GRUB configuration file
-        GRUB_CONFIG_FILE="/etc/default/grub"
-
-        # New line to be inserted
-        NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff"'
-
-        # Replace line in GRUB configuration file
-        sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
-        sudo update-grub
-
-        print_log "**⚠️ GRUB configuration updated successfully. ⚠️**"
-    fi
-}
-
 installCoreCtrl() {
     ###############################################################################
     #              Adding CoreCtrl source and Install CoreCtrl                    #
@@ -31,7 +11,6 @@ installCoreCtrl() {
         # addMesaSource
         sudo apt-get update
         sudo apt install corectrl -y
-        enableFullAmdGpuControl
         rollBackSource
     fi
 }

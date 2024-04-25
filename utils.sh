@@ -48,19 +48,35 @@ installDependencies() {
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 }
 
-enablePlaymouth() {
+defaultGrubEnhanced() {
+    gpu_info=$(lspci | grep -i vga)
+    # Check GPU manufacturer
     # Path to GRUB configuration file
-    GRUB_CONFIG_FILE="/etc/default/grub"
 
-    # New line to be inserted
-    NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+    GRUB_CONFIG_FILE="/etc/default/grub"
+    if [[ "$gpu_info" == *AMD* || "$gpu_info" == *amd* ]]; then
+        print_log "**⚠️ Enable Full AMD GPU controls - Grub Update⚠️**"
+
+        # New line to be inserted
+        NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff"'
+
+        # Replace line in GRUB configuration file
+        sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
+        sudo update-grub
+
+        
+    else
+        # New line to be inserted
+        NEW_GRUB_LINE='GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+    fi
 
     # Replace line in GRUB configuration file
     sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$NEW_GRUB_LINE|" $GRUB_CONFIG_FILE
     sudo update-grub
+    print_log "**⚠️ GRUB configuration updated successfully. ⚠️**"
 }
 
-addMesaSource(){
+addMesaSource() {
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB8B81E14DA65431D7504EA8F63F0F2B90935439
     sudo rm /etc/apt/trusted.gpg.d/slack.gpg
     sudo apt-key export 90935439 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/slack.gpg
