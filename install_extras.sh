@@ -8,7 +8,6 @@ installCoreCtrl() {
         print_log "\n###############################################################
 ##      Adding CoreCtrl source and Install CoreCtrl          ##
 ###############################################################\n"
-        # addMesaSource
         sudo apt-get update
         sudo apt install corectrl -y
         rollBackSource

@@ -3,7 +3,6 @@
 installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing tools and Steam ####################\n"
-    # sudo apt install -y mangohud steam-installer gamescope gamemode mangohud
     # Steam Replaced for Flathub Steam.
     flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
