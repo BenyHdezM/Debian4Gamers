@@ -81,7 +81,7 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "1" "Install Steam, Flatpak and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install FlatHubApps ( Recommended ) " ON \
-  "4" "Install WhiteSur and Gnome Configs ( Recommended )" ON \
+  "4" "Install WhiteSur Theme and Configs ( Recommended )" ON \
   "5" "Install CoreCtrl ( OC ) " OFF \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
   "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
