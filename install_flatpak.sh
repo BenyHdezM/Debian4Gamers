@@ -4,14 +4,14 @@ installSteamAndTools() {
     upgradeSystem
     print_log "\n#################### Installing tools and Steam ####################\n"
     # Steam Replaced for Flathub Steam.
-    flatpak install -y flathub com.valvesoftware.Steam
+    sudo flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
     sudo apt clean
 }
 
 installFlatpakApps() {
     InstallOptions=$(whiptail --separate-output --title "Flatpak Apps Options" --checklist \
-        "Choose Flatpak Apps to Install" 20 78 10 \
+        "Choose Flatpak Apps to Install" 20 78 12 \
         "1" "Install Discord" ON \
         "2" "Install ProtonUp-Qt" OFF \
         "3" "Install Spotify" OFF \
@@ -21,7 +21,9 @@ installFlatpakApps() {
         "7" "Install Helvum" OFF \
         "8" "Install Heroic Launcher" OFF \
         "9" "Install Telegram" OFF \
-        "10" "Install Proton VPN" OFF 3>&1 1>&2 2>&3)
+        "10" "Install Proton VPN" OFF \
+        "11" "Install Piper (Gaming mouse configuration utility)" OFF \
+        "12" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -66,12 +68,18 @@ installFlatpakApps() {
                 sudo flatpak install -y flathub org.telegram.desktop
                 ;;
             "10")
-                cd /tmp
-                wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
-                sudo dpkg -i ./protonvpn-stable-release_1.0.3-2_all.deb && sudo apt update
-                sudo apt update && sudo apt upgrade -y
-                sudo apt install -y proton-vpn-gnome-desktop
                 sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1
+                sudo flatpak install -y flathub com.protonvpn.www
+                ;;
+            "11")
+                sudo apt install ratbagd
+                sudo flatpak install -y flathub org.freedesktop.Piper
+                ;;
+            "12")
+                sudo flatpak install flathub org.openrgb.OpenRGB
+                wget https://openrgb.org/releases/release_0.9/openrgb-udev-install.sh
+                chmod +x openrgb-udev-install.sh
+                bash openrgb-udev-install.sh
                 ;;
             *)
                 echo "Unsupported item $Options!" >&2
