@@ -75,6 +75,7 @@ upgradeSystem
 installDependencies
 installFlatpak
 defaultGrubEnhanced
+disableWayland
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 70 12 \

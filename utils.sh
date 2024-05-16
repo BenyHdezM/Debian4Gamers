@@ -119,3 +119,7 @@ installFlatpak() {
     ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
+
+disableWayland() {
+    sudo sed -i 's/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/daemon.conf
+}

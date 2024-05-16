@@ -18,7 +18,7 @@ installAMDPRO() {
 
 installMesaDrivers() {
     ###############################################################################
-    #               Upgrading MESA VULKAN DRIVERS from Testing branch             #
+    #       Upgrading MESA VULKAN DRIVERS from Kisak PPA ( Expperimental)         #
     ###############################################################################
     print_log "**⚠️ Installing latest Mesa Vulkan Drivers ⚠️**"
     sudo apt clean
@@ -34,8 +34,6 @@ installBackportUpgrades() {
 }
 
 installGpuDrivers() {
-    if whiptail --title "Installing Latest GPU Drivers" --yesno "Would you like to install the Nvidia GPU drivers on your system? This will entail installing Nvidia-Drivers from the Stable Repository.\
-    Please note that this feature is experimental, I do not use or have an Nvidia GPU for test this feature, please notify me if something is wrong." 20 78; then
         print_log "\n###############################################################
 ##                     Installing Latest GPU Drivers                ##
 ###############################################################\n"
@@ -57,5 +55,4 @@ installGpuDrivers() {
             print_log "**⚠️ Unknown or no dedicated GPU detected.  Noting to do... ⚠️**"
             ;;
         esac
-    fi
 }
