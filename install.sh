@@ -88,7 +88,7 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
   "9" "Install Visual Studio Code ( Extra ) " OFF \
   "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF \
-  "11" "Disable Wayland ( Recommended for Gaming on Desktop ) " OFF \ 3 >&1 1>&2 2>&3)
+  "11" "Disable Wayland ( Recommended for Gaming on Desktop ) " OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
