@@ -75,7 +75,6 @@ upgradeSystem
 installDependencies
 installFlatpak
 defaultGrubEnhanced
-disableWayland
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
   "Choose Installation Options" 20 70 12 \
@@ -88,7 +87,8 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
   "9" "Install Visual Studio Code ( Extra ) " OFF \
-  "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF 3>&1 1>&2 2>&3)
+  "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF \
+  "11" "Disable Wayland ( Recommended for Gaming on Desktop ) " OFF \ 3 >&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -126,6 +126,9 @@ else
       ;;
     "10")
       installGpuDrivers
+      ;;
+    "11")
+      disableWayland
       ;;
     *)
       echo "Unsupported item $Options!" >&2
