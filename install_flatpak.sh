@@ -1,7 +1,6 @@
 #! /usr/bin/env bash
 
 installSteamAndTools() {
-    upgradeSystem
     print_log "\n#################### Installing tools and Steam ####################\n"
     # Steam Replaced for Flathub Steam.
     sudo flatpak install -y flathub com.valvesoftware.Steam

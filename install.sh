@@ -4,9 +4,6 @@
 #                             Debian4Gamers                                   #
 ###############################################################################
 
-###############################################################################
-#                           DECLARED VARIABLES                                #
-###############################################################################
 importSource() {
   archivo="$1"
   if [ -f "$archivo" ]; then
@@ -32,7 +29,6 @@ importSource "install_drivers.sh"
 if [[ -w "/root" ]]; then
   print_log "Do not run the script with root"
   exit
-  #USER_NAME=$(id -nu 1000)
 else
   USER_NAME=$(whoami)
 fi
@@ -51,11 +47,6 @@ print_log "###############################################################
 #                             Add User to sudoers                             #
 ###############################################################################
 if [[ -e /etc/sudoers.d/$USER_NAME ]]; then
-  # if whiptail --title "$USER_NAME is already a Sudoers" --yesno "Do you want to remove it from Sudoers?" 8 78; then
-  #   echo -e "Removing $USER_NAME from Sudoers and exit"
-  #   sudo rm /etc/sudoers.d/$USER_NAME
-  #   exit
-  # fi
   print_log "**⚠️ $USER_NAME is already a Sudoers ⚠️**"
 else
   print_log "###############################################################
@@ -77,18 +68,18 @@ installFlatpak
 defaultGrubEnhanced
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
-  "Choose Installation Options" 20 70 12 \
+  "Choose Installation Options" 20 75 12 \
   "1" "Install Steam, Flatpak and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install FlatHubApps ( Recommended ) " ON \
   "4" "Install WhiteSur Theme and Configs ( Recommended )" ON \
-  "5" "Install CoreCtrl ( OC ) " OFF \
+  "5" "Install CoreCtrl ( AMD GPUs Controls ) " OFF \
   "6" "Install LiquidCtl ( Liquid Cooling Control ) " OFF \
   "7" "Install Auto-CpuFreq ( Battery Performance )" OFF \
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
   "9" "Install Visual Studio Code ( Extra ) " OFF \
   "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF \
-  "11" "Disable Wayland ( Recommended for Gaming on Desktop ) " OFF 3>&1 1>&2 2>&3)
+  "11" "Disable Wayland ( Recommended for Nvidia Gaming or Desktop ) " OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -125,7 +116,7 @@ else
       installVSCode
       ;;
     "10")
-      installGpuDrivers
+      installNvidiaDrivers
       ;;
     "11")
       disableWayland
@@ -146,5 +137,5 @@ sudo apt autoremove -y
 if whiptail --title "Installation Complete" --yesno "To apply changes, please reboot your system Would you like to reboot now?" 8 78; then
   sudo reboot
 else
-  echo -e "\nEnsure to reboot your system soon to apply the changes"
+  print_log "\nEnsure to reboot your system soon to apply the changes"
 fi

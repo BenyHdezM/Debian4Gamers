@@ -4,13 +4,16 @@ installCoreCtrl() {
     ###############################################################################
     #              Adding CoreCtrl source and Install CoreCtrl                    #
     ###############################################################################
-    if whiptail --title "CoreCtrl" --yesno "Are you insterested on Install CoreCtrl?" 8 78; then
-        print_log "\n###############################################################
-##      Adding CoreCtrl source and Install CoreCtrl          ##
-###############################################################\n"
+    gpu_info=$(lspci | grep -i vga)
+    # Check GPU manufacturer
+    # Path to GRUB configuration file
+
+    GRUB_CONFIG_FILE="/etc/default/grub"
+    if [[ "$gpu_info" == *AMD* || "$gpu_info" == *amd* ]]; then
         sudo apt-get update
         sudo apt install corectrl -y
-        rollBackSource
+    else
+        print_log "**⚠️ Not AMD GPU detected... ignoring step ⚠️**"
     fi
 }
 

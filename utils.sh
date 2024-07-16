@@ -75,36 +75,6 @@ defaultGrubEnhanced() {
     print_log "**⚠️ GRUB configuration updated successfully. ⚠️**"
 }
 
-addMesaSource() {
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB8B81E14DA65431D7504EA8F63F0F2B90935439
-    sudo rm /etc/apt/trusted.gpg.d/slack.gpg
-    sudo apt-key export 90935439 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/slack.gpg
-    sudo echo -e "\ndeb [arch=amd64] https://ppa.launchpadcontent.net/kisak/kisak-mesa/ubuntu jammy main " | sudo tee -a /etc/apt/sources.list
-}
-
-switchToTestingSource() {
-    sudo rm /etc/apt/sources.list
-    sudo echo -e "\ndeb http://deb.debian.org/debian testing main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
-}
-
-switchToSidSource() {
-    sudo rm /etc/apt/sources.list
-    sudo echo -e "\ndeb http://deb.debian.org/debian sid main non-free-firmware contrib non-free" | sudo tee -a /etc/apt/sources.list
-}
-
-rollBackSource() {
-    ###############################################################################
-    #                   Rollback - remove Testing branch                          #
-    ###############################################################################
-    print_log "\n###############################################################
-##         Rollingback -> removing Testing branch            ##
-###############################################################\n"
-    sudo rm /etc/apt/sources.list
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/stable_sources.list -O /etc/apt/sources.list
-    sudo apt update
-    sudo apt autoremove -y
-}
-
 installFlatpak() {
     ###############################################################################
     #                   Installing Flatpak and Flathub Store                      #
