@@ -9,7 +9,7 @@ importSource() {
   if [ -f "$archivo" ]; then
     source "$archivo"
   else
-    sudo wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/$archivo -O /tmp/$archivo
+    wget https://github.com/BenyHdezM/Debian4Gamers/raw/main/$archivo -O /tmp/$archivo
     source /tmp/$archivo
   fi
 }
