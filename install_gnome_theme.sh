@@ -16,7 +16,7 @@ installGnomeTheme() {
         cd /tmp/
         #GTK
         git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-        ./WhiteSur-gtk-theme/install.sh -i debian -l -N glassy
+        ./WhiteSur-gtk-theme/install.sh --shell -i debian -l -N glassy
         ./WhiteSur-gtk-theme/tweaks.sh -F
         sudo flatpak override --filesystem=xdg-config/gtk-4.0
         rm ~/.config/gtk-4.0/gtk.css
