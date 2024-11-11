@@ -4,6 +4,7 @@ upgradeSystem() {
     ###############################################################################
     #                   Updating all the system                                   #
     ###############################################################################
+    echo "vm.max_map_count=1048576" | sudo tee -a /etc/sysctl.conf
     sudo rm /etc/apt/sources.list
 
     if [ -f "stable_sources.list" ]; then
