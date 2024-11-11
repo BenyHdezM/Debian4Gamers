@@ -55,10 +55,10 @@ installFlatpakApps() {
             "6")
                 installVKCapture
                 sudo flatpak install -y com.obsproject.Studio
-                sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/23.08
+                sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/24.08
                 sudo flatpak install -y com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable
                 sudo flatpak install -y com.obsproject.Studio.Plugin.BackgroundRemoval
-                sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08
+                sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/24.08
                 sudo flatpak install -y com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable
                 ;;
             "7")
@@ -108,6 +108,6 @@ installVKCapture() {
 }
 
 installFreedesktopVulkanLayers() {
-    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
-    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08
+    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08
+    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08
 }
