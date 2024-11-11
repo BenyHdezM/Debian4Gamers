@@ -48,6 +48,7 @@ installDependencies() {
     #Enabling user-theme Extensions
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
     gsettings set org.gnome.mutter check-alive-timeout 10000
+    gnome-extensions enable ubuntu-appindicators@ubuntu.com
 }
 
 defaultGrubEnhanced() {
