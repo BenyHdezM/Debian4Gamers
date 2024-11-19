@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-installNvidiaDrivers() {
+installPrivativeGpuDrivers() {
     # Search for graphics cards in the system using lspci
     gpu_info=$(lspci | grep -i vga)
     # Check GPU manufacturer

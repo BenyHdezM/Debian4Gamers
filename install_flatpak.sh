@@ -6,6 +6,8 @@ installSteamAndTools() {
     sudo flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
     sudo apt clean
+    flatpak override com.valvesoftware.Steam --user --env=MANGOHUD=1
+    flatpak override com.valvesoftware.Steam --user --env=OBS_VKCAPTURE=1
 }
 
 installFlatpakApps() {
@@ -20,9 +22,8 @@ installFlatpakApps() {
         "7" "Install Helvum" OFF \
         "8" "Install Heroic Launcher" OFF \
         "9" "Install Telegram" OFF \
-        "10" "Install Proton VPN" OFF \
-        "11" "Install Piper (Gaming mouse configuration utility)" OFF \
-        "12" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
+        "10" "Install Piper (Gaming mouse configuration utility)" OFF \
+        "11" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -72,14 +73,10 @@ installFlatpakApps() {
                 sudo flatpak install -y flathub org.telegram.desktop
                 ;;
             "10")
-                sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1
-                sudo flatpak install -y flathub com.protonvpn.www
-                ;;
-            "11")
                 sudo apt install ratbagd
                 sudo flatpak install -y flathub org.freedesktop.Piper
                 ;;
-            "12")
+            "11")
                 sudo flatpak install flathub org.openrgb.OpenRGB
                 wget https://openrgb.org/releases/release_0.9/openrgb-udev-install.sh
                 chmod +x openrgb-udev-install.sh
@@ -102,12 +99,10 @@ installVKCapture() {
     mkdir build && cd build
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
     make && sudo make install
-    print_log "1. Add Game Capture to your OBS scene."
-    print_log "2. Start the game with capture enabled obs-gamecapture %command%."
-    print_log "3. (Recommended) Start the game with only Vulkan capture enabled env OBS_VKCAPTURE=1 %command%."
 }
 
 installFreedesktopVulkanLayers() {
     sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08
     sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08
+    sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/24.08
 }
