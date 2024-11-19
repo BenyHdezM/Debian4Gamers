@@ -20,6 +20,7 @@ upgradeSystem() {
     # sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
     sudo apt dist-upgrade -y
     sudo apt autoremove -y
+    sudo apt install linux-image-amd64 -t stable-backports
 }
 
 vaapiOnFirefox() {
