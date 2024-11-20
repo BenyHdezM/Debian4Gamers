@@ -46,6 +46,7 @@ installGnomeTheme() {
         gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
         gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
         gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-Dark'
+        gsettings set org.gnome.desktop.interface clock-format '12h'
 
         wget https://raw.githubusercontent.com/BenyHdezM/Debian4Gamers/main/images/sierra.jpg -O $HOME/sierra.jpg
         ruta_imagen="$HOME/sierra.jpg"
