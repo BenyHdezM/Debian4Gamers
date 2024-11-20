@@ -53,7 +53,7 @@ else
     Hello $USER_NAME, enter the ROOT password 
     to add your user_name:<'$USER_NAME'> to the Sudoers list:                  
 ###############################################################\n"
-  su - root -c 'echo "'${USER_NAME}'  ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/'${USER_NAME}''
+  su - root -c 'echo | sudo usermod -aG sudo '${USER_NAME}''
 fi
 
 print_log "\n###############################################################
