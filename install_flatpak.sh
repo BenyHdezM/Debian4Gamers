@@ -6,8 +6,8 @@ installSteamAndTools() {
     sudo flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
     sudo apt clean
-    flatpak override com.valvesoftware.Steam --user --env=MANGOHUD=1
     flatpak override com.valvesoftware.Steam --user --env=OBS_VKCAPTURE=1
+    flatpak override com.valvesoftware.Steam --user --env=MANGOHUD=1
     flatpak override --user com.valvesoftware.Steam --env=PATH=$PATH:/usr/lib/extensions/vulkan/gamescope/bin
 }
 
@@ -57,7 +57,7 @@ installFlatpakApps() {
             "6")
                 installVKCapture
                 sudo flatpak install -y com.obsproject.Studio
-                sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/24.08
+                sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/23.08
                 sudo flatpak install -y com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable
                 sudo flatpak install -y com.obsproject.Studio.Plugin.BackgroundRemoval
                 sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/24.08
