@@ -44,11 +44,11 @@ installFlatpakApps() {
                 ;;
             "4")
                 sudo flatpak install -y flathub com.usebottles.bottles
-                sudo flatpak override --user com.usebottles.bottles --filesystem=xdg-data/applications
+                flatpak override --user com.usebottles.bottles --filesystem=xdg-data/applications
                 #Steam non-Flatpak
-                sudo flatpak override --user com.usebottles.bottles --filesystem=~/.local/share/Steam
+                flatpak override --user com.usebottles.bottles --filesystem=~/.local/share/Steam
                 #Steam Flatpak
-                sudo flatpak override --user com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam
+                flatpak override --user com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam
                 installFreedesktopVulkanLayers
                 ;;
             "5")
