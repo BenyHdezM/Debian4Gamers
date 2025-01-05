@@ -6,9 +6,9 @@ installSteamAndTools() {
     sudo flatpak install -y flathub com.valvesoftware.Steam
     installFreedesktopVulkanLayers
     sudo apt clean
-    flatpak override com.valvesoftware.Steam --user --env=OBS_VKCAPTURE=1
-    flatpak override com.valvesoftware.Steam --user --env=MANGOHUD=1
-    flatpak override --user com.valvesoftware.Steam --env=PATH=$PATH:/usr/lib/extensions/vulkan/gamescope/bin
+    sudo flatpak override com.valvesoftware.Steam --user --env=OBS_VKCAPTURE=1
+    sudo flatpak override com.valvesoftware.Steam --user --env=MANGOHUD=1
+    sudo flatpak override --user com.valvesoftware.Steam --env=PATH=$PATH:/usr/lib/extensions/vulkan/gamescope/bin
 }
 
 installFlatpakApps() {
@@ -44,11 +44,11 @@ installFlatpakApps() {
                 ;;
             "4")
                 sudo flatpak install -y flathub com.usebottles.bottles
-                flatpak override com.usebottles.bottles --user --filesystem=xdg-data/applications
+                sudo flatpak override com.usebottles.bottles --user --filesystem=xdg-data/applications
                 #Steam non-Flatpak
-                flatpak override com.usebottles.bottles --filesystem=~/.local/share/Steam
+                sudo flatpak override com.usebottles.bottles --filesystem=~/.local/share/Steam
                 #Steam Flatpak
-                flatpak override com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam
+                sudo flatpak override com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam
                 installFreedesktopVulkanLayers
                 ;;
             "5")
