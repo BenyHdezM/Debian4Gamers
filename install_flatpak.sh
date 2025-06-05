@@ -24,7 +24,8 @@ installFlatpakApps() {
         "8" "Install Heroic Launcher" OFF \
         "9" "Install Telegram" OFF \
         "10" "Install Piper (Gaming mouse configuration utility)" OFF \
-        "11" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
+        "11" "InstInstall OpenRGB (RGB lighting control)" OFF \
+        "12" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -82,6 +83,13 @@ installFlatpakApps() {
                 wget https://openrgb.org/releases/release_0.9/openrgb-udev-install.sh
                 chmod +x openrgb-udev-install.sh
                 bash openrgb-udev-install.sh
+                ;;
+            "12")
+                wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb
+                sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb && sudo apt update
+                echo "0b14e71586b22e498eb20926c48c7b434b751149b1f2af9902ef1cfe6b03e180 protonvpn-stable-release_1.0.8_all.deb" | sha256sum --check -
+                sudo apt install proton-vpn-gnome-desktop
+                sudo apt install libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1 gnome-shell-extension-appindicator
                 ;;
             *)
                 echo "Unsupported item $Options!" >&2
