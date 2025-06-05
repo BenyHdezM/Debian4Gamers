@@ -20,8 +20,43 @@ upgradeSystem() {
     # sudo dpkg --add-architecture i386 #Add x86 Architecture (Needed for Steam-Installer)
     sudo apt dist-upgrade -y
     sudo apt autoremove -y
-    sudo apt install linux-base -t stable-backports
-    sudo apt install linux-image-amd64 -t experimental
+    selectKernel
+}
+
+selectKernel(){
+    PACKAGE="linux-image-amd64"
+
+    # Obtener versiones exactas desde madison
+    experimental_version=$(apt-cache madison $PACKAGE | grep experimental | head -n1 | awk '{print $3}')
+    backports_version=$(apt-cache madison $PACKAGE | grep backports | head -n1 | awk '{print $3}')
+
+    InstallOptions=$(whiptail --separate-output --title "Select Kernel" --radiolist \
+        "Select your Kernel Preference:
+⚠️   Experimental could offer the best performance for gaming, but requires manual updates.
+✅   Stable Backports auto-update by default and it's a safer option." 12 75 2 \
+        "1" "Experimental     - versión: ${experimental_version}            " OFF \
+        "2" "Stable Backports - versión: ${backports_version}               " ON 3>&1 1>&2 2>&3)
+
+    if [ -z "$InstallOptions" ]; then
+        echo "No option was selected (user hit Cancel or unselected all options)"
+    else
+        for Option in $InstallOptions; do
+            echo $InstallOptions
+            case "$Option" in
+            "1")
+                sudo apt install linux-base -t stable-backports
+                sudo apt install linux-image-amd64 -t experimental
+                ;;
+            "2")
+                sudo apt install linux-image-amd64 -t stable-backports
+                ;;
+            *)
+                echo "Unsupported item $Options!" >&2
+                exit 1
+                ;;
+            esac
+        done
+    fi
 }
 
 vaapiOnFirefox() {
