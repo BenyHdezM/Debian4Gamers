@@ -8,6 +8,7 @@ installSteamAndTools() {
     sudo apt clean
     flatpak override --user com.valvesoftware.Steam --env=OBS_VKCAPTURE=1
     flatpak override --user com.valvesoftware.Steam --env=MANGOHUD=1
+    flatpak override --user com.valvesoftware.Steam --env=STEAMDECK=1
     flatpak override --user com.valvesoftware.Steam --env=PATH=$PATH:/usr/lib/extensions/vulkan/gamescope/bin
 }
 
