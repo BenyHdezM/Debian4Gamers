@@ -78,7 +78,7 @@ installDependencies() {
 ##                Installing Dependencies                    ##
 ###############################################################\n"
     sudo apt install -y libavcodec-extra bpytop neofetch git mpv mesa-opencl-icd bash-completion vulkan-tools vainfo firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
-    sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator
+    sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator preload
     sudo apt clean
     sudo apt autoremove
     vaapiOnFirefox
@@ -86,6 +86,8 @@ installDependencies() {
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
     gsettings set org.gnome.mutter check-alive-timeout 10000
     gnome-extensions enable ubuntu-appindicators@ubuntu.com
+    sudo systemctl enable preload
+    sudo systemctl start preload
 }
 
 defaultGrubEnhanced() {
