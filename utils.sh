@@ -52,6 +52,9 @@ selectKernel(){
             "2")
                 sudo apt install linux-image-amd64 -t stable-backports
                 ;;
+            "3")
+                sudo apt install linux-image-amd64
+                ;;
             *)
                 echo "Unsupported item $Options!" >&2
                 exit 1
