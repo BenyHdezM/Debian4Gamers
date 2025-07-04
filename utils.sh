@@ -29,13 +29,15 @@ selectKernel(){
     # Obtener versiones exactas desde madison
     experimental_version=$(apt-cache madison $PACKAGE | grep experimental | head -n1 | awk '{print $3}')
     backports_version=$(apt-cache madison $PACKAGE | grep backports | head -n1 | awk '{print $3}')
+    stable_version=$(apt-cache madison $PACKAGE | grep stable/main | head -n1 | awk '{print $3}')
 
     InstallOptions=$(whiptail --separate-output --title "Select Kernel" --radiolist \
-        "Select your Kernel Preference:
-⚠️   Experimental could offer the best performance for gaming, but requires manual updates.
-✅   Stable Backports auto-update by default and it's a safer option." 12 75 2 \
-        "1" "Experimental     - versión: ${experimental_version}            " OFF \
-        "2" "Stable Backports - versión: ${backports_version}               " ON 3>&1 1>&2 2>&3)
+"⚠️  Using a newer kernel can offer benefits in some cases, but it's important to remember that Debian’s focus is on stability. Newer kernels should generally be used only when required for specific hardware or use cases.
+⚠️   The Experimental kernel may deliver the best performance, especially for gaming, but it comes with the trade-off of manual updates and potential instability..
+✅   Stable Backports auto-update by default, offering a safer and more reliable option for most users, especially if your hardware is not too old." 14 115 3 \
+        "1" "Experimental     - versión: ${experimental_version} | For cutting-edge hardware " OFF \
+        "2" "Stable Backports - versión: ${backports_version} | For hardware that's not too new, but not too old " OFF \
+        "3" "Stable - versión: ${stable_version} | Recommended for supported and stable hardware " ON 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
