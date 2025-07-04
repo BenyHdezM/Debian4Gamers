@@ -18,6 +18,7 @@ installGnomeTheme() {
         git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
         ./WhiteSur-gtk-theme/install.sh --shell -i debian -l --round
         ./WhiteSur-gtk-theme/tweaks.sh -F
+        ./WhiteSur-gtk-theme/tweaks.sh -f monterey
         sudo flatpak override --filesystem=xdg-config/gtk-4.0
         rm ~/.config/gtk-4.0/gtk.css
         ln -s ~/.config/gtk-4.0/gtk-Light.css ~/.config/gtk-4.0/gtk.css

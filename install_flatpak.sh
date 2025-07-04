@@ -15,18 +15,19 @@ installSteamAndTools() {
 installFlatpakApps() {
     InstallOptions=$(whiptail --separate-output --title "Flatpak Apps Options" --checklist \
         "Choose Flatpak Apps to Install" 20 78 12 \
-        "1" "Install Discord" ON \
-        "2" "Install ProtonUp-Qt" OFF \
-        "3" "Install Spotify" OFF \
-        "4" "Install Bottles" OFF \
-        "5" "Install GPU Screen Recorder" OFF \
-        "6" "Install OBS-Studio" OFF \
-        "7" "Install Helvum" OFF \
-        "8" "Install Heroic Launcher" OFF \
-        "9" "Install Telegram" OFF \
-        "10" "Install Piper (Gaming mouse configuration utility)" OFF \
-        "11" "InstInstall OpenRGB (RGB lighting control)" OFF \
-        "12" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
+        "1" "Replace Firefox-est for Latest" ON \
+        "2" "Install Discord" ON \
+        "3" "Install ProtonUp-Qt" OFF \
+        "4" "Install Spotify" OFF \
+        "5" "Install Bottles" OFF \
+        "6" "Install GPU Screen Recorder" OFF \
+        "7" "Install OBS-Studio" OFF \
+        "8" "Install Helvum" OFF \
+        "9" "Install Heroic Launcher" OFF \
+        "10" "Install Telegram" OFF \
+        "11" "Install Piper (Gaming mouse configuration utility)" OFF \
+        "12" "InstInstall OpenRGB (RGB lighting control)" OFF \
+        "13" "Install OpenRGB (RGB lighting control)" OFF 3>&1 1>&2 2>&3)
 
     if [ -z "$InstallOptions" ]; then
         echo "No option was selected (user hit Cancel or unselected all options)"
@@ -35,16 +36,19 @@ installFlatpakApps() {
             echo $InstallOptions
             case "$Option" in
             "1")
+                installFirefoxLatest
+                ;;
+            "2")
                 sudo flatpak install -y flathub com.discordapp.Discord
                 sudo flatpak install -y flathub io.github.trigg.discover_overlay
                 ;;
-            "2")
+            "3")
                 sudo flatpak install -y flathub net.davidotek.pupgui2
                 ;;
-            "3")
+            "4")
                 sudo flatpak install -y flathub com.spotify.Client
                 ;;
-            "4")
+            "5")
                 sudo flatpak install -y flathub com.usebottles.bottles
                 flatpak override --user com.usebottles.bottles --filesystem=xdg-data/applications
                 #Steam non-Flatpak
@@ -53,10 +57,10 @@ installFlatpakApps() {
                 flatpak override --user com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam
                 installFreedesktopVulkanLayers
                 ;;
-            "5")
+            "6")
                 sudo flatpak install -y flathub com.dec05eba.gpu_screen_recorder
                 ;;
-            "6")
+            "7")
                 installVKCapture
                 sudo flatpak install -y com.obsproject.Studio
                 sudo flatpak install -y org.freedesktop.Platform.GStreamer.gstreamer-vaapi/x86_64/23.08
@@ -65,27 +69,27 @@ installFlatpakApps() {
                 sudo flatpak install -y org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/24.08
                 sudo flatpak install -y com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable
                 ;;
-            "7")
+            "8")
                 sudo flatpak install -y flathub org.pipewire.Helvum
                 ;;
-            "8")
+            "9")
                 sudo flatpak install -y flathub com.heroicgameslauncher.hgl
                 installFreedesktopVulkanLayers
                 ;;
-            "9")
+            "10")
                 sudo flatpak install -y flathub org.telegram.desktop
                 ;;
-            "10")
+            "11")
                 sudo apt install ratbagd
                 sudo flatpak install -y flathub org.freedesktop.Piper
                 ;;
-            "11")
+            "12")
                 sudo flatpak install flathub org.openrgb.OpenRGB
                 wget https://openrgb.org/releases/release_0.9/openrgb-udev-install.sh
                 chmod +x openrgb-udev-install.sh
                 bash openrgb-udev-install.sh
                 ;;
-            "12")
+            "13")
                 wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb
                 sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb && sudo apt update
                 echo "0b14e71586b22e498eb20926c48c7b434b751149b1f2af9902ef1cfe6b03e180 protonvpn-stable-release_1.0.8_all.deb" | sha256sum --check -

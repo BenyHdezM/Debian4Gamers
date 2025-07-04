@@ -73,3 +73,10 @@ installVSCode() {
     sudo apt-get update
     sudo apt-get install code # or code-insiders
 }
+
+installFirefoxLatest(){
+    sudo extrepo enable mozilla
+    sudo apt update
+    sudo apt remove firefox-esr -y
+    sudo apt install firefox -y
+}
