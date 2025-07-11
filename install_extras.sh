@@ -66,16 +66,15 @@ installVSCode() {
     print_log "\n###############################################################
 ##                  Installing Visual Studio Code            ##
 ###############################################################\n"
-    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-    sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/keyrings/microsoft-archive-keyring.gpg
-    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    # Then update the package cache and install the package using:
-    sudo apt-get update
-    sudo apt-get install code # or code-insiders
+    sudo extrepo enable code
+    sudo extrepo update code
+    sudo apt update
+    sudo apt install code -y
 }
 
 installFirefoxLatest(){
     sudo extrepo enable mozilla
+    sudo extrepo update mozilla
     sudo apt update
     sudo apt remove firefox-esr -y
     sudo apt install firefox -y

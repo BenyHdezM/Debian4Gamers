@@ -90,10 +90,16 @@ installDependencies() {
     vaapiOnFirefox
     #Enabling user-theme Extensions
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+    #This make Gnome give more time to Steam to react
     gsettings set org.gnome.mutter check-alive-timeout 10000
     gnome-extensions enable ubuntu-appindicators@ubuntu.com
     sudo systemctl enable preload
     sudo systemctl start preload
+    #Enable Extrepo non-free
+    sudo cp /etc/extrepo/config.yaml /etc/extrepo/config.yaml.bak
+
+    #Uncomment Lines
+    sudo sed -i 's/^#-\s*\(main\|contrib\|non-free\)/- \1/' /etc/extrepo/config.yaml
 }
 
 defaultGrubEnhanced() {
