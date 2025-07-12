@@ -35,8 +35,8 @@ Your quick action is needed for a smooth setup. Thank you!" 8 78
                 ;;
             "2")
                 busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "trayIconsReloaded@selfmade.pl"
+                gnome-extensions enable ubuntu-appindicators@ubuntu.com
                 gnome-extensions enable trayIconsReloaded@selfmade.pl
-
                 ;;
             "3")
                 busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s "dash-to-dock@micxgx.gmail.com"

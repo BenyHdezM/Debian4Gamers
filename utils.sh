@@ -92,7 +92,8 @@ installDependencies() {
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
     #This make Gnome give more time to Steam to react
     gsettings set org.gnome.mutter check-alive-timeout 10000
-    gnome-extensions enable ubuntu-appindicators@ubuntu.com
+    #This fix the Gnome-Calculator Crashes.
+    gsettings set org.gnome.calculator refresh-interval 0
     sudo systemctl enable preload
     sudo systemctl start preload
     #Enable Extrepo non-free
