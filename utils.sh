@@ -100,7 +100,7 @@ installDependencies() {
     sudo cp /etc/extrepo/config.yaml /etc/extrepo/config.yaml.bak
 
     #Uncomment Lines
-    sudo sed -i 's/^#-\s*\(main\|contrib\|non-free\)/- \1/' /etc/extrepo/config.yaml
+    sudo sed -i 's/^# -\s*\(main\|contrib\|non-free\)/- \1/' /etc/extrepo/config.yaml
 }
 
 defaultGrubEnhanced() {
