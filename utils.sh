@@ -143,7 +143,7 @@ installFlatpak() {
     sudo apt clean
     ## sudo apt install plasma-discover-backend-flatpak  ## TODO: Identify if plasma-discover is installed
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    sudo flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+    #sudo flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 }
 
 disableWayland() {
