@@ -66,8 +66,8 @@ installVSCode() {
     print_log "\n###############################################################
 ##                  Installing Visual Studio Code            ##
 ###############################################################\n"
-    sudo extrepo enable code
-    sudo extrepo update code
+    sudo extrepo enable vscode
+    sudo extrepo update vscode
     sudo apt update
     sudo apt install code -y
 }
