@@ -83,7 +83,7 @@ installDependencies() {
 ##                Installing Dependencies                    ##
 ###############################################################\n"
     sudo apt install -y libavcodec-extra bpytop neofetch git mpv mesa-opencl-icd bash-completion vulkan-tools vainfo firmware-linux firmware-linux-free firmware-linux-nonfree firmware-amd-graphics
-    sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator preload extrepo
+    sudo apt install -y lm-sensors gnome-shell-extension-dashtodock gnome-shell-extension-appindicator preload extrepo rar unrar zip unzip 7zip
 
     sudo apt clean
     sudo apt autoremove
