@@ -46,11 +46,11 @@ selectKernel(){
             echo $InstallOptions
             case "$Option" in
             "1")
-                sudo apt install linux-base -t stable-backports
+                sudo apt install linux-base firmware-linux -t stable-backports
                 sudo apt install linux-image-amd64 -t experimental
                 ;;
             "2")
-                sudo apt install linux-image-amd64 -t stable-backports
+                sudo apt install linux-image-amd64 firmware-linux -t stable-backports
                 ;;
             "3")
                 sudo apt install linux-image-amd64
