@@ -17,7 +17,7 @@ installFlatpakApps() {
         "Choose Flatpak Apps to Install" 20 78 12 \
         "1" "Replace Firefox-est for Latest" ON \
         "2" "Install Discord" ON \
-        "3" "Install ProtonUp-Qt" OFF \
+        "3" "Install ProtonPlus" OFF \
         "4" "Install Spotify" OFF \
         "5" "Install Bottles" OFF \
         "6" "Install GPU Screen Recorder" OFF \
@@ -43,7 +43,7 @@ installFlatpakApps() {
                 sudo flatpak install -y flathub io.github.trigg.discover_overlay
                 ;;
             "3")
-                sudo flatpak install -y flathub net.davidotek.pupgui2
+                flatpak install flathub com.vysp3r.ProtonPlus
                 ;;
             "4")
                 sudo flatpak install -y flathub com.spotify.Client
